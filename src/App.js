@@ -1,7 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  let myjson = require("./countries.json");
+  console.log(myjson);
   return (
     <div className="App">
       <header className="App-header">

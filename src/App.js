@@ -2,8 +2,11 @@ import "./App.css";
 import React, { useState } from "react";
 import Info from "./components/Info.js";
 import Form from "./components/Form.js";
+import Result from "./components/Result.js";
 
 function App() {
+    const [msg, setMsg] = useState("Welcome to the game!");
+
     let myjson = require("./countries.json");
 
     function checkNeighbours(first, second) {
@@ -22,7 +25,7 @@ function App() {
 
     function addCountry(countryName) {
         if (!checkCountry(countryName)) {
-            alert(`${countryName} is not a valid country`);
+            setMsg(`${countryName} is not a valid country`);
             return false;
         } else {
             if (countries.length > 0) {
@@ -35,7 +38,7 @@ function App() {
                     setCountries([...countries, countryName]);
                     return true;
                 } else {
-                    alert(
+                    setMsg(
                         `${countryName} is not a neighbour of ${
                             countries[countries.length - 1]
                         }`
@@ -52,8 +55,9 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">🔗Country Chains🔗</header>
-            <Info msg="Welcome to the game!" />
+            <Info msg={msg} />
             <Form addCountryFunc={addCountry} />
+            <Result countries={countries} />
         </div>
     );
 }

@@ -1,27 +1,35 @@
-import logo from "./logo.svg";
 import "./App.css";
+import React, { useState } from "react";
+import Info from "./components/Info.js";
+import Form from "./components/Form.js";
 
 function App() {
-  let myjson = require("./countries.json");
-  console.log(myjson);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let myjson = require("./countries.json");
+
+    function checkNeighbours(first, second) {
+        const searchResults = myjson.find((c) => c.country === first);
+        return searchResults
+            ? searchResults.neighbours.includes(second)
+            : false;
+    }
+
+    function checkCountry(country) {
+        const searchResults = myjson.find((c) => c.country === country);
+        return searchResults ? true : false;
+    }
+
+    // checkNeighbours(["Ghana", "Togo"]);
+
+    return (
+        <div className="App">
+            <header className="App-header">🔗Country Chains🔗</header>
+            <Info msg="Welcome to the game!" />
+            <Form
+                checkNeighboursFunc={checkNeighbours}
+                checkCountryFunc={checkCountry}
+            />
+        </div>
+    );
 }
 
 export default App;

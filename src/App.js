@@ -18,16 +18,42 @@ function App() {
         return searchResults ? true : false;
     }
 
-    // checkNeighbours(["Ghana", "Togo"]);
+    const [countries, setCountries] = useState([]);
+
+    function addCountry(countryName) {
+        if (!checkCountry(countryName)) {
+            alert(`${countryName} is not a valid country`);
+            return false;
+        } else {
+            if (countries.length > 0) {
+                if (
+                    checkNeighbours(
+                        countries[countries.length - 1],
+                        countryName
+                    )
+                ) {
+                    setCountries([...countries, countryName]);
+                    return true;
+                } else {
+                    alert(
+                        `${countryName} is not a neighbour of ${
+                            countries[countries.length - 1]
+                        }`
+                    );
+                    return false;
+                }
+            } else {
+                setCountries([...countries, countryName]);
+                return true;
+            }
+        }
+    }
 
     return (
         <div className="App">
             <header className="App-header">🔗Country Chains🔗</header>
             <Info msg="Welcome to the game!" />
-            <Form
-                checkNeighboursFunc={checkNeighbours}
-                checkCountryFunc={checkCountry}
-            />
+            <Form addCountryFunc={addCountry} />
         </div>
     );
 }

@@ -62,5 +62,5 @@
 
 .App-footer a {
     color: white;
-    font-size: calc(10px + vmin);
+    font-size: calc(10px + 1vmin);
 }

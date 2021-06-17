@@ -18,25 +18,27 @@ function Form(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit} autoComplete="off">
-            <h2 className="label-wrapper">
-                <label htmlFor="country-input" className="label">
-                    Enter a country name:
-                </label>
-            </h2>
-            <input
-                type="text"
-                id="country-input"
-                className="input"
-                name="text"
-                autoComplete="off"
-                value={name}
-                onChange={handleChange}
-            />
-            <button type="submit" className="btn">
-                Chain it!
-            </button>
-        </form>
+        <div className="Form">
+            <form onSubmit={handleSubmit} autoComplete="off">
+                <h2 className="label-wrapper">
+                    <label htmlFor="country-input" className="label">
+                        Enter a country name:
+                    </label>
+                </h2>
+                <input
+                    type="text"
+                    id="country-input"
+                    className="input"
+                    name="text"
+                    autoComplete="off"
+                    value={name}
+                    onChange={handleChange}
+                />
+                <button type="submit" className="btn">
+                    Chain it!
+                </button>
+            </form>
+        </div>
     );
 }
 

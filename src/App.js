@@ -58,6 +58,11 @@ function App() {
             <Info msg={msg} />
             <Form addCountryFunc={addCountry} />
             <Result countries={countries} />
+            <footer className="App-footer">
+                <a href="https://github.com/mckwxp/country-chains">
+                    Source code on GitHub
+                </a>
+            </footer>
         </div>
     );
 }

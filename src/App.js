@@ -5,29 +5,45 @@ import Form from "./components/Form.js";
 import Result from "./components/Result.js";
 
 function App() {
-    const [msg, setMsg] = useState("Welcome to the game!");
-
+    // Data for country neighbours
     let myjson = require("./countries.json");
 
+    // Checks if the second country is a neighbour of the first country
     function checkNeighbours(first, second) {
-        const searchResults = myjson.find((c) => c.country === first);
+        const searchResults = myjson.find(
+            (c) => c.country.toLowerCase() === first.toLowerCase()
+        );
         return searchResults
-            ? searchResults.neighbours.includes(second)
+            ? searchResults.neighbours
+                  .map((x) => x.toLowerCase())
+                  .includes(second.toLowerCase())
             : false;
     }
 
+    // Checks if a country is in the data object
     function checkCountry(country) {
-        const searchResults = myjson.find((c) => c.country === country);
+        const searchResults = myjson.find(
+            (c) => c.country.toLowerCase() === country.toLowerCase()
+        );
         return searchResults ? true : false;
     }
 
+    // State for messsage panel
+    const [msg, setMsg] = useState("Welcome to the game!");
+
+    // State for results panel; contains an array of countries
     const [countries, setCountries] = useState([]);
 
+    // Core logic to check if the entered country is a neighbour of the most recent one
+    // Sets message panel and results panel accordingly
+    // Returns Boolean to indicate if country is successfully added to the array
     function addCountry(countryName) {
+        // check validity of entered country name
         if (!checkCountry(countryName)) {
             setMsg(`${countryName} is not a valid country`);
             return false;
         } else {
+            // array already populated; not the first added country
             if (countries.length > 0) {
                 if (
                     checkNeighbours(
@@ -46,7 +62,8 @@ function App() {
                     return false;
                 }
             } else {
-                setCountries([...countries, countryName]);
+                // first added country
+                setCountries([countryName]);
                 return true;
             }
         }

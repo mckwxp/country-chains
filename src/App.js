@@ -52,6 +52,7 @@ function App() {
                     )
                 ) {
                     setCountries([...countries, countryName]);
+                    setMsg("Well done! Keep going!");
                     return true;
                 } else {
                     setMsg(
@@ -64,6 +65,7 @@ function App() {
             } else {
                 // first added country
                 setCountries([countryName]);
+                setMsg("Great start to the game!");
                 return true;
             }
         }
@@ -72,7 +74,10 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">🔗Country Chains🔗</header>
-            <Info msg={msg} />
+            <Info
+                msg={msg}
+                score={[countries.length, [...new Set(countries)].length]}
+            />
             <Form addCountryFunc={addCountry} />
             <Result countries={countries} />
             <footer className="App-footer">

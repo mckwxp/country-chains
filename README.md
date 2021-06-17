@@ -2,6 +2,8 @@
 
 Chain neighbouring countries around the world!
 
+Play the game at https://mckwxp.github.io/country-chains
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

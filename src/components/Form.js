@@ -7,7 +7,7 @@ function Form(props) {
         e.preventDefault();
         const countryName = name.trim();
         if (countryName !== "") {
-            if (props.addCountryFunc(countryName)) {
+            if (props.addCountry(countryName)) {
                 setName("");
             }
         }
@@ -18,7 +18,7 @@ function Form(props) {
     }
 
     function handleClick() {
-        props.setPageFunc(props.pages.END);
+        props.setPage(props.pages.END);
     }
 
     return (

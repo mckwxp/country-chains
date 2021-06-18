@@ -67,7 +67,7 @@ function App() {
             } else {
                 // first added country
                 setCountries([countryName]);
-                setMsg("Great start to the game!");
+                setMsg("Great start!");
                 return true;
             }
         }
@@ -80,15 +80,19 @@ function App() {
         if (page === pages.START) {
             return (
                 <>
-                    <StartPage setPageFunc={setPage} pages={pages} />
+                    <StartPage
+                        setPage={setPage}
+                        pages={pages}
+                        setMsg={setMsg}
+                    />
                 </>
             );
         } else if (page === pages.GAME) {
             return (
                 <>
                     <Form
-                        addCountryFunc={addCountry}
-                        setPageFunc={setPage}
+                        addCountry={addCountry}
+                        setPage={setPage}
                         pages={pages}
                     />
                     <Result countries={countries} />
@@ -97,19 +101,22 @@ function App() {
         } else if (page === pages.END) {
             return (
                 <>
-                    <EndPage />
+                    <EndPage
+                        setMsg={setMsg}
+                        setPage={setPage}
+                        pages={pages}
+                        setCountries={setCountries}
+                    />
                 </>
             );
         }
     }
 
+    const score = [countries.length, [...new Set(countries)].length];
     return (
         <div className="App">
             <header className="App-header">🔗Country Chains🔗</header>
-            <Info
-                msg={msg}
-                score={[countries.length, [...new Set(countries)].length]}
-            />
+            <Info msg={msg} score={score} />
             {Main() /* reason for this: https://stackoverflow.com/a/65328486 */}
             {/* <Form addCountryFunc={addCountry} />
             <Result countries={countries} /> */}

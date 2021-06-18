@@ -2,7 +2,8 @@ import React from "react";
 
 function StartPage(props) {
     function handleClick() {
-        props.setPageFunc(props.pages.GAME);
+        props.setPage(props.pages.GAME);
+        props.setMsg("Let's begin!");
     }
     return (
         <div className="StartPage">

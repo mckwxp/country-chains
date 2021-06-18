@@ -110,7 +110,7 @@ function App() {
                 msg={msg}
                 score={[countries.length, [...new Set(countries)].length]}
             />
-            <Main />
+            {Main() /* reason for this: https://stackoverflow.com/a/65328486 */}
             {/* <Form addCountryFunc={addCountry} />
             <Result countries={countries} /> */}
             <footer className="App-footer">

@@ -41,10 +41,10 @@ function Form(props) {
                 <button type="submit" className="btn">
                     Chain it!
                 </button>
-                <button type="submit" className="btn" onClick={handleClick}>
-                    Finish
-                </button>
             </form>
+            <button type="button" className="btn" onClick={handleClick}>
+                Finish
+            </button>
         </div>
     );
 }

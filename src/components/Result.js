@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { nanoid } from "nanoid";
 
 function Result(props) {

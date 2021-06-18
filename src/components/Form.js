@@ -17,6 +17,10 @@ function Form(props) {
         setName(e.target.value);
     }
 
+    function handleClick() {
+        props.setPageFunc(props.pages.END);
+    }
+
     return (
         <div className="Form">
             <form onSubmit={handleSubmit} autoComplete="off">
@@ -36,6 +40,9 @@ function Form(props) {
                 />
                 <button type="submit" className="btn">
                     Chain it!
+                </button>
+                <button type="submit" className="btn" onClick={handleClick}>
+                    Finish
                 </button>
             </form>
         </div>

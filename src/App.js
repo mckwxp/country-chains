@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Info from "./components/Info.js";
 import Form from "./components/Form.js";
 import Result from "./components/Result.js";
+import StartPage from "./components/StartPage.js";
+import EndPage from "./components/EndPage.js";
 
 function App() {
     // Data for country neighbours
@@ -71,6 +73,36 @@ function App() {
         }
     }
 
+    const [page, setPage] = useState(0);
+    const pages = { START: 0, GAME: 1, END: 2 };
+
+    function Main() {
+        if (page === pages.START) {
+            return (
+                <>
+                    <StartPage setPageFunc={setPage} pages={pages} />
+                </>
+            );
+        } else if (page === pages.GAME) {
+            return (
+                <>
+                    <Form
+                        addCountryFunc={addCountry}
+                        setPageFunc={setPage}
+                        pages={pages}
+                    />
+                    <Result countries={countries} />
+                </>
+            );
+        } else if (page === pages.END) {
+            return (
+                <>
+                    <EndPage />
+                </>
+            );
+        }
+    }
+
     return (
         <div className="App">
             <header className="App-header">🔗Country Chains🔗</header>
@@ -78,8 +110,9 @@ function App() {
                 msg={msg}
                 score={[countries.length, [...new Set(countries)].length]}
             />
-            <Form addCountryFunc={addCountry} />
-            <Result countries={countries} />
+            <Main />
+            {/* <Form addCountryFunc={addCountry} />
+            <Result countries={countries} /> */}
             <footer className="App-footer">
                 <a href="https://github.com/mckwxp/country-chains">
                     Source code on GitHub

@@ -1,32 +1,21 @@
 import pyspark.sql.functions as F
 
-df = spark.read.csv('countries.csv')
+df = spark.read.csv('newcountries.csv', header=True)
 
-df2 = df.select('country', 'neighbours').withColumn(
-    'neighbours', 
-    F.expr("""
-    coalesce(
-        filter(
-            transform(
-                split(
-                    regexp_replace(neighbours, '\\\\[.*\\\\]', ''), '\\\\)'
-                ), 
-                x -> trim(
-                    regexp_replace(
-                        regexp_replace(split(x, ':')[0], '\\\\(.*$', ''),
-                        '\\\\p{Z}', 
-                        ' '
-                    )
-                )
-            ),
-            x -> length(x) > 1 and x not rlike '[0-9]'
-        ), 
-        array()
-    )
-    """)
-).withColumn(
-    'country', 
-    F.expr("regexp_replace(country, '\\\\[.*\\\\]', '')")
-)
-
-df2.coalesce(1).write.mode('overwrite').json('country')
+df.replace({
+    'Congo (the Democratic Republic of the)': 'Democratic Republic of Congo', 
+    'Korea (Democratic People\'s Republic of)': 'North Korea', 
+    'Korea (the Republic of)': 'South Korea', 
+    'Lao People\'s Democratic Republic': 'Laos', 
+    'Russian Federation': 'Russia', 
+    'Viet Nam': 'Vietnam', 
+    'Palestine, State of': 'Palestine', 
+    'United Kingdom of Great Britain and Northern Ireland': 'United Kingdom', 
+    'Syrian Arab Republic': 'Syria', 
+    'Brunei Darussalam': 'Brunei'
+}).selectExpr(
+    "regexp_replace(country_name, ' \\\\(.*\\\\)', '') country", 
+    "regexp_replace(country_border_name, ' \\\\(.*\\\\)', '') neighbour"
+).groupBy('country').agg(
+    F.collect_list('neighbour').alias('neighbours')
+).orderBy('country').coalesce(1).write.json('newcountries')

@@ -7,9 +7,9 @@ function StartPage(props) {
     }
     return (
         <div className="StartPage">
-            <div>
+            <p>
                 In this game, you will create a chain of neighbouring countries.
-            </div>
+            </p>
             <button type="button" className="btn" onClick={handleClick}>
                 Play now!
             </button>

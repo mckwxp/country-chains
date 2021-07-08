@@ -121,7 +121,11 @@ function App() {
             {/* <Form addCountryFunc={addCountry} />
             <Result countries={countries} /> */}
             <footer className="App-footer">
-                <a href="https://github.com/mckwxp/country-chains">
+                <a
+                    href="https://github.com/mckwxp/country-chains"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     Source code on GitHub
                 </a>
             </footer>

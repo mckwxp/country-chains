@@ -79,35 +79,35 @@ function App() {
     function Main() {
         if (page === pages.START) {
             return (
-                <>
+                <div className="main-container">
                     <StartPage
                         setPage={setPage}
                         pages={pages}
                         setMsg={setMsg}
                     />
-                </>
+                </div>
             );
         } else if (page === pages.GAME) {
             return (
-                <>
+                <div className="main-container">
                     <Form
                         addCountry={addCountry}
                         setPage={setPage}
                         pages={pages}
                     />
                     <Result countries={countries} />
-                </>
+                </div>
             );
         } else if (page === pages.END) {
             return (
-                <>
+                <div className="main-container">
                     <EndPage
                         setMsg={setMsg}
                         setPage={setPage}
                         pages={pages}
                         setCountries={setCountries}
                     />
-                </>
+                </div>
             );
         }
     }

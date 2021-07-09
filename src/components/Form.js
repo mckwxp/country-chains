@@ -24,11 +24,11 @@ function Form(props) {
     return (
         <div className="Form">
             <form onSubmit={handleSubmit} autoComplete="off">
-                <h2 className="label-wrapper">
+                <p className="label-wrapper">
                     <label htmlFor="country-input" className="label">
                         Enter a country name:
                     </label>
-                </h2>
+                </p>
                 <input
                     type="text"
                     id="country-input"

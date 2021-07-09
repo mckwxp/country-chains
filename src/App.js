@@ -37,9 +37,6 @@ function App() {
     // State for results panel; contains an array of countries
     const [countries, setCountries] = useState([]);
 
-    // State for latest country to add to the map
-    const [latestCountry, setLatestCountry] = useState("");
-
     // Core logic to check if the entered country is a neighbour of the most recent one
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
@@ -58,7 +55,6 @@ function App() {
                     )
                 ) {
                     setCountries([...countries, countryName]);
-                    setLatestCountry(countryName);
                     setMsg("Well done! Keep going!");
                     return true;
                 } else {
@@ -72,7 +68,6 @@ function App() {
             } else {
                 // first added country
                 setCountries([countryName]);
-                setLatestCountry(countryName);
                 setMsg("Great start!");
                 return true;
             }
@@ -98,17 +93,20 @@ function App() {
                         />
                         <Result countries={countries} />
                     </div>
-                    <Map country={latestCountry} />
+                    <Map countries={countries} />
                 </div>
             );
         } else if (page === pages.END) {
             return (
-                <EndPage
-                    setMsg={setMsg}
-                    setPage={setPage}
-                    pages={pages}
-                    setCountries={setCountries}
-                />
+                <div className="main-container">
+                    <EndPage
+                        setMsg={setMsg}
+                        setPage={setPage}
+                        pages={pages}
+                        setCountries={setCountries}
+                    />
+                    <Map countries={countries} />
+                </div>
             );
         }
     }

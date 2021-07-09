@@ -45,6 +45,10 @@
     font-size: 16px;
 } */
 
+.label-wrapper {
+    font-size: 24px;
+}
+
 .main-container {
     height: calc(100vh - 161.27px);
     display: flex;
@@ -69,7 +73,8 @@
     min-height: 60vh;
 } */
 
-.game {
+.game,
+.EndPage {
     flex: 0 0 50vw;
 }
 

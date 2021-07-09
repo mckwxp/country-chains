@@ -5,6 +5,7 @@ import Form from "./components/Form.js";
 import Result from "./components/Result.js";
 import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
+import Map from "./components/Map.js";
 
 function App() {
     // Data for country neighbours
@@ -36,6 +37,9 @@ function App() {
     // State for results panel; contains an array of countries
     const [countries, setCountries] = useState([]);
 
+    // State for latest country to add to the map
+    const [latestCountry, setLatestCountry] = useState("");
+
     // Core logic to check if the entered country is a neighbour of the most recent one
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
@@ -54,6 +58,7 @@ function App() {
                     )
                 ) {
                     setCountries([...countries, countryName]);
+                    setLatestCountry(countryName);
                     setMsg("Well done! Keep going!");
                     return true;
                 } else {
@@ -67,6 +72,7 @@ function App() {
             } else {
                 // first added country
                 setCountries([countryName]);
+                setLatestCountry(countryName);
                 setMsg("Great start!");
                 return true;
             }
@@ -79,35 +85,30 @@ function App() {
     function Main() {
         if (page === pages.START) {
             return (
-                <div className="main-container">
-                    <StartPage
-                        setPage={setPage}
-                        pages={pages}
-                        setMsg={setMsg}
-                    />
-                </div>
+                <StartPage setPage={setPage} pages={pages} setMsg={setMsg} />
             );
         } else if (page === pages.GAME) {
             return (
                 <div className="main-container">
-                    <Form
-                        addCountry={addCountry}
-                        setPage={setPage}
-                        pages={pages}
-                    />
-                    <Result countries={countries} />
+                    <div className="game">
+                        <Form
+                            addCountry={addCountry}
+                            setPage={setPage}
+                            pages={pages}
+                        />
+                        <Result countries={countries} />
+                    </div>
+                    <Map country={latestCountry} />
                 </div>
             );
         } else if (page === pages.END) {
             return (
-                <div className="main-container">
-                    <EndPage
-                        setMsg={setMsg}
-                        setPage={setPage}
-                        pages={pages}
-                        setCountries={setCountries}
-                    />
-                </div>
+                <EndPage
+                    setMsg={setMsg}
+                    setPage={setPage}
+                    pages={pages}
+                    setCountries={setCountries}
+                />
             );
         }
     }
@@ -118,8 +119,6 @@ function App() {
             <header className="App-header">🔗Country Chains🔗</header>
             <Info msg={msg} score={score} />
             {Main() /* reason for this: https://stackoverflow.com/a/65328486 */}
-            {/* <Form addCountryFunc={addCountry} />
-            <Result countries={countries} /> */}
             <footer className="App-footer">
                 <a
                     href="https://github.com/mckwxp/country-chains"

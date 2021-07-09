@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+
     /* display: flex;
     height: 100vh;
     flex-direction: column; */
@@ -45,9 +46,9 @@
 } */
 
 .main-container {
-    /* display: flex;
-    flex-direction: column; */
     height: calc(100vh - 161.27px);
+    display: flex;
+
     /* add scrollbar within container if overflows
        auto works for Firefox and overlay works for Safari/Chrome */
     overflow-y: auto;
@@ -57,6 +58,9 @@
 .StartPage,
 .EndPage {
     font-size: 18px;
+    height: calc(100vh - 179.27px);
+    margin: 0;
+    padding: 0;
 }
 
 /* .Result {
@@ -64,6 +68,15 @@
     flex-direction: column;
     min-height: 60vh;
 } */
+
+.game {
+    flex: 0 0 50vw;
+}
+
+.Map {
+    flex: 0 0 50vw;
+    height: inherit;
+}
 
 .Result ul {
     display: inline-block;
@@ -90,3 +103,14 @@
     color: white;
     font-size: 16px;
 }
+
+/* .App-header,
+.Info,
+.main-container,
+.App-footer {
+    width: 50vw;
+}
+
+.App {
+    border: 5px solid black;
+} */

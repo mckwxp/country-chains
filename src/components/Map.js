@@ -28,7 +28,7 @@ function Map(props) {
                     radius={5}
                     key={"id-" + nanoid()}
                 >
-                    <Tooltip>UK</Tooltip>
+                    <Tooltip>{country.country}</Tooltip>
                 </CircleMarker>
             ) : null;
         });

@@ -75,11 +75,11 @@
 
 .game,
 .EndPage {
-    flex: 0 0 50vw;
+    flex: 0 0 30%;
 }
 
 .Map {
-    flex: 0 0 50vw;
+    flex: 0 0 70%;
     height: inherit;
 }
 

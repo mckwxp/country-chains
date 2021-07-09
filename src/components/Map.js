@@ -51,7 +51,7 @@ function Map(props) {
     }
 
     return (
-        <MapContainer center={[34.3, 75.5]} zoom={2} className="Map">
+        <MapContainer center={[25, 0]} zoom={2} className="Map">
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://c.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"

@@ -1608,6 +1608,11 @@
         "longitude" : -37
       },
   {
+        "country": "South Sudan",
+        "latitude": 8,
+        "longitude": 30
+      },
+  {
         "country" : "Spain",
         "alpha2" : "ES",
         "alpha3" : "ESP",
@@ -1648,7 +1653,7 @@
         "longitude" : 20
       },
   {
-        "country" : "Swaziland",
+        "country" : "Eswatini",
         "alpha2" : "SZ",
         "alpha3" : "SWZ",
         "numeric" : 748,

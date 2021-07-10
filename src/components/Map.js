@@ -11,11 +11,17 @@ import { nanoid } from "nanoid";
 function Map(props) {
     let latlongData = require("../countries_latlong.json");
 
+    function findLatLong(x) {
+        let countryArr = latlongData.filter(
+            (c) => c.country.toLowerCase() === x
+        );
+
+        return countryArr.length !== 0 ? countryArr[0] : null;
+    }
+
     function LocationMarker() {
         return props.countries.map((x, i) => {
-            let country = latlongData.filter(
-                (c) => c.country.toLowerCase() === x
-            )[0];
+            let country = findLatLong(x);
 
             return country ? (
                 <CircleMarker
@@ -35,19 +41,15 @@ function Map(props) {
     }
 
     function Lines() {
-        return (
-            <Polyline
-                positions={props.countries.map((x, i) => {
-                    let country = latlongData.filter(
-                        (c) => c.country.toLowerCase() === x
-                    )[0];
+        let pos = props.countries
+            .map((x, i) => {
+                let country = findLatLong(x);
 
-                    return country
-                        ? [country.latitude, country.longitude]
-                        : null;
-                })}
-            />
-        );
+                return country ? [country.latitude, country.longitude] : null;
+            })
+            .filter((c) => c !== null);
+
+        return pos.length !== 0 ? <Polyline positions={pos} /> : null;
     }
 
     return (

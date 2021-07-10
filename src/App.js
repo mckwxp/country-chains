@@ -23,6 +23,14 @@ function App() {
             : false;
     }
 
+    // Checks if a country has a neighbour
+    function checkNeighbourExists(country) {
+        const searchResults = myjson.find(
+            (c) => c.country.toLowerCase() === country.toLowerCase()
+        );
+        return searchResults.neighbours.length !== 0;
+    }
+
     // Checks if a country is in the data object
     function checkCountry(country) {
         const searchResults = myjson.find(
@@ -59,17 +67,28 @@ function App() {
                     return true;
                 } else {
                     setMsg(
-                        `${countryName} is not a neighbour of ${
-                            countries[countries.length - 1]
-                        }`
+                        <>
+                            <span className="country-name">{countryName} </span>{" "}
+                            is not a neighbour of{" "}
+                            <span className="country-name">
+                                {countries[countries.length - 1]}
+                            </span>
+                        </>
                     );
                     return false;
                 }
             } else {
                 // first added country
-                setCountries([countryName]);
-                setMsg("Great start!");
-                return true;
+                if (checkNeighbourExists(countryName)) {
+                    setCountries([countryName]);
+                    setMsg("Great start!");
+                    return true;
+                } else {
+                    setMsg(
+                        "This country does not have any neighbours. Please name another one."
+                    );
+                    return false;
+                }
             }
         }
     }

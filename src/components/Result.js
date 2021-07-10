@@ -8,7 +8,11 @@ function Result(props) {
         .slice(0)
         .reverse()
         .map((c) => {
-            return <li key={"id-" + nanoid()}>{c}</li>;
+            return (
+                <li key={"id-" + nanoid()} className="country-name">
+                    {c}
+                </li>
+            );
         });
 
     return (

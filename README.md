@@ -4,6 +4,13 @@ Chain neighbouring countries around the world!
 
 Play the game at https://mckwxp.github.io/country-chains
 
+This app is written in JavaScript using React and Leaflet. 
+
+## Credits
+Country borders data: https://github.com/geodatasource/country-borders/blob/master/GEODATASOURCE-COUNTRY-BORDERS.CSV
+Country latitude and longitude data: https://github.com/eesur/country-codes-lat-long/blob/master/country-codes-lat-long-alpha3.json
+
+<!---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -74,3 +81,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-->

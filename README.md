@@ -7,7 +7,7 @@ Play the game at https://mckwxp.github.io/country-chains
 This app is written in JavaScript using React and Leaflet. 
 
 ## Credits
-Country borders data: https://github.com/geodatasource/country-borders/blob/master/GEODATASOURCE-COUNTRY-BORDERS.CSV
+Country borders data: https://github.com/geodatasource/country-borders/blob/master/GEODATASOURCE-COUNTRY-BORDERS.CSV  
 Country latitude and longitude data: https://github.com/eesur/country-codes-lat-long/blob/master/country-codes-lat-long-alpha3.json
 
 <!---

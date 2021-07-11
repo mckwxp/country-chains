@@ -62,6 +62,9 @@ function App() {
     // State for results panel; contains an array of countries
     const [countries, setCountries] = useState([]);
 
+    // State for number of players
+    const [players, setPlayers] = useState(1);
+
     // Core logic to check if the entered country is a neighbour of the most recent one
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
@@ -115,7 +118,12 @@ function App() {
     function Main() {
         if (page === pages.START) {
             return (
-                <StartPage setPage={setPage} pages={pages} setMsg={setMsg} />
+                <StartPage
+                    setPage={setPage}
+                    pages={pages}
+                    setMsg={setMsg}
+                    setPlayers={setPlayers}
+                />
             );
         } else if (page === pages.GAME) {
             return (
@@ -126,9 +134,9 @@ function App() {
                             setPage={setPage}
                             pages={pages}
                         />
-                        <Result countries={countries} />
+                        <Result countries={countries} players={players} />
                     </div>
-                    <Map countries={countries} />
+                    <Map countries={countries} players={players} />
                 </div>
             );
         } else if (page === pages.END) {
@@ -140,7 +148,7 @@ function App() {
                         pages={pages}
                         setCountries={setCountries}
                     />
-                    <Map countries={countries} />
+                    <Map countries={countries} players={players} />
                 </div>
             );
         }

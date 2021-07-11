@@ -5,15 +5,11 @@ function Result(props) {
     // converts the country list to a list
     // reverse the list so that most recent one is on top
     const countries = props.countries
+        .map((c, i) => {
+            return <li key={"id-" + nanoid()}>{c}</li>;
+        })
         .slice(0)
-        .reverse()
-        .map((c) => {
-            return (
-                <li key={"id-" + nanoid()} className="country-name">
-                    {c}
-                </li>
-            );
-        });
+        .reverse();
 
     return (
         <div className="Result">

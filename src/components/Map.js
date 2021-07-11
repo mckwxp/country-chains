@@ -5,6 +5,8 @@ import {
     CircleMarker,
     Tooltip,
     Polyline,
+    Marker,
+    LayersControl,
 } from "react-leaflet";
 import { nanoid } from "nanoid";
 
@@ -21,6 +23,8 @@ function Map(props) {
     }
 
     function LocationMarker() {
+        let colors = ["green", "red", "blue", "orange"];
+
         // add circle markers for each country
         return props.countries.map((x, i) => {
             let country = findLatLong(x);
@@ -29,8 +33,7 @@ function Map(props) {
                 <CircleMarker
                     center={[country.latitude, country.longitude]}
                     pathOptions={{
-                        color:
-                            i === props.countries.length - 1 ? "blue" : "green",
+                        color: colors[i % props.players],
                         fillOpacity: 1,
                     }}
                     radius={5}
@@ -55,6 +58,28 @@ function Map(props) {
         return pos.length !== 0 ? <Polyline positions={pos} /> : null;
     }
 
+    function CurrentLocation() {
+        if (props.countries.length > 0) {
+            let country = findLatLong(
+                props.countries[props.countries.length - 1]
+            );
+            return (
+                <LayersControl position="topright" collapsed={false}>
+                    <LayersControl.Overlay
+                        name="Current Location"
+                        checked={true}
+                    >
+                        <Marker
+                            position={[country.latitude, country.longitude]}
+                        ></Marker>
+                    </LayersControl.Overlay>
+                </LayersControl>
+            );
+        } else {
+            return null;
+        }
+    }
+
     return (
         <MapContainer center={[25, 0]} zoom={2} className="Map">
             <TileLayer
@@ -63,6 +88,7 @@ function Map(props) {
             />
             <LocationMarker />
             <Lines />
+            <CurrentLocation />
         </MapContainer>
     );
 }

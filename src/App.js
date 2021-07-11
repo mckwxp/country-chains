@@ -9,7 +9,7 @@ import Map from "./components/Map.js";
 
 function App() {
     // Data for country neighbours
-    let myjson = require("./countries.json");
+    const myjson = require("./countries.json");
 
     // Checks if the second country is a neighbour of the first country
     function checkNeighbours(first, second) {
@@ -39,6 +39,17 @@ function App() {
         return searchResults ? true : false;
     }
 
+    const synonyms = require("./countries_synonyms.json");
+
+    function checkSynonyms(country) {
+        const searchResults = synonyms.find((c) =>
+            c.synonyms
+                .map((x) => x.toLowerCase())
+                .includes(country.toLowerCase())
+        );
+        return searchResults ? searchResults.country : country;
+    }
+
     // State for messsage panel
     const [msg, setMsg] = useState("Welcome to the game!");
 
@@ -49,6 +60,9 @@ function App() {
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
     function addCountry(countryName) {
+        // check for synonyms
+        countryName = checkSynonyms(countryName);
+
         // check validity of entered country name
         if (!checkCountry(countryName)) {
             setMsg(`${countryName} is not a valid country`);

@@ -1,0 +1,12 @@
+[
+    {"country": "Democratic Republic of Congo", "synonyms": ["DR Congo", "DRC"]}, 
+    {"country": "Congo", "synonyms": ["Republic of Congo"]},
+    {"country": "Central African Republic", "synonyms": ["CAR"]},
+    {"country": "Cote d'Ivoire", "synonyms": ["Ivory Coast", "Côte d'Ivoire"]},
+    {"country": "China", "synonyms": ["PRC"]},
+    {"country": "United States of America", "synonyms": ["USA", "US", "United States"]}, 
+    {"country": "Guinea-Bissau", "synonyms": ["Guinea Bissau"]},
+    {"country": "Eswatini", "synonyms": ["Swaziland"]},
+    {"country": "North Macedonia", "synonyms": ["Macedonia", "FYROM"]},
+    {"country": "Czechia", "synonyms": ["Czech Republic"]}
+]

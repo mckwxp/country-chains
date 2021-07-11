@@ -9,12 +9,12 @@ import {
 import { nanoid } from "nanoid";
 
 function Map(props) {
-    let latlongData = require("../countries_latlong.json");
+    const latlongData = require("../countries_latlong.json");
 
     function findLatLong(x) {
         // get lat/long data from country name
         let countryArr = latlongData.filter(
-            (c) => c.country.toLowerCase() === x
+            (c) => c.country.toLowerCase() === x.toLowerCase()
         );
 
         return countryArr.length !== 0 ? countryArr[0] : null;

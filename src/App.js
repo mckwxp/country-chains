@@ -71,7 +71,7 @@ function App() {
         countryName = checkCountry(countryName);
 
         if (!countryName) {
-            setMsg(`This is not a valid country`);
+            setMsg(`This is not a valid country.`);
             return false;
         } else {
             // array already populated; not the first added country
@@ -89,7 +89,7 @@ function App() {
                     setMsg(
                         `${countryName} is not a neighbour of ${
                             countries[countries.length - 1]
-                        }`
+                        }.`
                     );
                     return false;
                 }

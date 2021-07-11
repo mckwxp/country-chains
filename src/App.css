@@ -52,11 +52,6 @@
 .main-container {
     height: calc(100vh - 161.27px);
     display: flex;
-
-    /* add scrollbar within container if overflows
-       auto works for Firefox and overlay works for Safari/Chrome */
-    overflow-y: auto;
-    overflow-y: overlay;
 }
 
 .StartPage,
@@ -81,6 +76,13 @@
 .Map {
     flex: 0 0 70%;
     height: inherit;
+}
+
+.game {
+    /* add scrollbar within container if overflows
+       auto works for Firefox and overlay works for Safari/Chrome */
+    overflow-y: auto;
+    overflow-y: overlay;
 }
 
 .Result ul {

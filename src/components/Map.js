@@ -12,6 +12,7 @@ function Map(props) {
     let latlongData = require("../countries_latlong.json");
 
     function findLatLong(x) {
+        // get lat/long data from country name
         let countryArr = latlongData.filter(
             (c) => c.country.toLowerCase() === x
         );
@@ -20,6 +21,7 @@ function Map(props) {
     }
 
     function LocationMarker() {
+        // add circle markers for each country
         return props.countries.map((x, i) => {
             let country = findLatLong(x);
 
@@ -41,6 +43,7 @@ function Map(props) {
     }
 
     function Lines() {
+        // add lines to connect the circle markers
         let pos = props.countries
             .map((x, i) => {
                 let country = findLatLong(x);

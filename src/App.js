@@ -16,11 +16,15 @@ function App() {
         const searchResults = myjson.find(
             (c) => c.country.toLowerCase() === first.toLowerCase()
         );
-        return searchResults
-            ? searchResults.neighbours
-                  .map((x) => x.toLowerCase())
-                  .includes(second.toLowerCase())
-            : false;
+
+        if (searchResults) {
+            let filteredNeighbours = searchResults.neighbours.filter(
+                (x) => x.toLowerCase() === second.toLowerCase()
+            );
+            if (filteredNeighbours.length !== 0) {
+                return true;
+            }
+        }
     }
 
     // Checks if a country has a neighbour
@@ -28,7 +32,7 @@ function App() {
         const searchResults = myjson.find(
             (c) => c.country.toLowerCase() === country.toLowerCase()
         );
-        return searchResults.neighbours.length !== 0;
+        return searchResults ? searchResults.neighbours.length !== 0 : false;
     }
 
     // Checks if a country is in the data object
@@ -36,11 +40,13 @@ function App() {
         const searchResults = myjson.find(
             (c) => c.country.toLowerCase() === country.toLowerCase()
         );
-        return searchResults ? true : false;
+        return searchResults ? searchResults.country : false;
     }
 
+    // Data for country name synonyms
     const synonyms = require("./countries_synonyms.json");
 
+    // Checks for synonym of country names
     function checkSynonyms(country) {
         const searchResults = synonyms.find((c) =>
             c.synonyms
@@ -60,12 +66,12 @@ function App() {
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
     function addCountry(countryName) {
-        // check for synonyms
+        // check for synonyms and coutnry name validity
         countryName = checkSynonyms(countryName);
+        countryName = checkCountry(countryName);
 
-        // check validity of entered country name
-        if (!checkCountry(countryName)) {
-            setMsg(`${countryName} is not a valid country`);
+        if (!countryName) {
+            setMsg(`This is not a valid country`);
             return false;
         } else {
             // array already populated; not the first added country
@@ -81,13 +87,9 @@ function App() {
                     return true;
                 } else {
                     setMsg(
-                        <>
-                            <span className="country-name">{countryName} </span>{" "}
-                            is not a neighbour of{" "}
-                            <span className="country-name">
-                                {countries[countries.length - 1]}
-                            </span>
-                        </>
+                        `${countryName} is not a neighbour of ${
+                            countries[countries.length - 1]
+                        }`
                     );
                     return false;
                 }

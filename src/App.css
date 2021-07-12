@@ -1,5 +1,8 @@
 #App {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 header {
@@ -7,6 +10,7 @@ header {
     font-size: 30px;
     color: white;
     padding: 7.5px 0;
+    flex: 0 0 auto;
 }
 
 #Info {
@@ -14,6 +18,7 @@ header {
     color: black;
     font-size: 24px;
     padding: 6px 0;
+    flex: 0 0 auto;
 }
 
 #Info .score {
@@ -21,32 +26,34 @@ header {
     margin: 0 10px;
 }
 
+#StartPage {
+    flex: 1 1 auto;
+}
+
 #StartPage label {
     margin: 0 10px 0 0;
 }
 
 #main-container {
-    height: calc(100vh - 161.27px);
     display: flex;
     font-size: 18px;
+    flex: 1 1 auto;
 }
 
 #StartPage,
 #EndPage {
     font-size: 18px;
-    height: calc(100vh - 179.27px);
-    margin: 0;
-    padding: 0;
 }
 
 #game,
 #EndPage {
     flex: 0 0 30%;
+    min-width: 200px;
 }
 
 #Map {
-    flex: 0 0 70%;
-    height: inherit;
+    flex: 0 1 70%;
+    height: auto;
 }
 
 #game {
@@ -65,6 +72,7 @@ footer {
     background-color: #282c34;
     padding: 5px 10px;
     text-align: left;
+    flex: 0 0 auto;
 }
 
 footer a {

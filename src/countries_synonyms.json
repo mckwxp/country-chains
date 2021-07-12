@@ -4,6 +4,7 @@
     {"country": "Central African Republic", "synonyms": ["CAR"]},
     {"country": "Cote d'Ivoire", "synonyms": ["Ivory Coast", "Côte d'Ivoire"]},
     {"country": "China", "synonyms": ["PRC"]},
+    {"country": "United Kingdom", "synonyms": ["UK", "GB", "Great Britain", "Britain"]},
     {"country": "United States of America", "synonyms": ["USA", "US", "United States"]}, 
     {"country": "Guinea-Bissau", "synonyms": ["Guinea Bissau"]},
     {"country": "Eswatini", "synonyms": ["Swaziland"]},

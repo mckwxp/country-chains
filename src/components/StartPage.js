@@ -10,7 +10,7 @@ function StartPage(props) {
         props.setPlayers(parseInt(e.target.value));
     }
     return (
-        <div className="StartPage">
+        <div id="StartPage">
             <p>
                 In this game, you will create a chain of <br /> neighbouring
                 countries.
@@ -51,9 +51,7 @@ function StartPage(props) {
                     />
                     <label>4</label>
                 </div>
-                <button type="submit" className="btn">
-                    Play now!
-                </button>
+                <button type="submit">Play now!</button>
             </form>
         </div>
     );

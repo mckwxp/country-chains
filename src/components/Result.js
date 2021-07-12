@@ -12,7 +12,7 @@ function Result(props) {
         .reverse();
 
     return (
-        <div className="Result">
+        <div id="Result">
             <ul>{countries}</ul>
         </div>
     );

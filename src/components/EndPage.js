@@ -8,7 +8,7 @@ function EndPage(props) {
         props.setCountries([]);
     }
     return (
-        <div className="EndPage">
+        <div id="EndPage">
             <p>Thanks for playing!</p>
             <button type="button" className="btn" onClick={handleClick}>
                 Play again!

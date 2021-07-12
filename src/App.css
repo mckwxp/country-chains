@@ -1,127 +1,73 @@
-.App {
+#App {
     text-align: center;
-
-    /* display: flex;
-    height: 100vh;
-    flex-direction: column; */
 }
 
-.App-header {
+header {
     background-color: #282c34;
-    /* display: flex;
-    flex: 0 0 10vh;
-    height: 10vh; */
-    align-items: center;
-    justify-content: center;
     font-size: 30px;
     color: white;
     padding: 7.5px 0;
 }
 
-.Info {
+#Info {
     background-color: beige;
-    /* display: flex;
-    flex-direction: column;
-    height: 15vh;
-    align-items: center;
-    justify-content: center; */
     color: black;
     font-size: 24px;
     padding: 6px 0;
 }
 
-.Info1,
-.Info2 {
+#Info .score {
     display: inline-block;
     margin: 0 10px;
 }
 
-.StartPage label {
+#StartPage label {
     margin: 0 10px 0 0;
 }
 
-/* 
-.Form {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 auto;
-    max-height: 10vh;
-    font-size: 16px;
-} */
-
-.label-wrapper {
-    font-size: 24px;
-}
-
-.main-container {
+#main-container {
     height: calc(100vh - 161.27px);
     display: flex;
+    font-size: 18px;
 }
 
-.StartPage,
-.EndPage {
+#StartPage,
+#EndPage {
     font-size: 18px;
     height: calc(100vh - 179.27px);
     margin: 0;
     padding: 0;
 }
 
-/* .Result {
-    display: flex;
-    flex-direction: column;
-    min-height: 60vh;
-} */
-
-.game,
-.EndPage {
+#game,
+#EndPage {
     flex: 0 0 30%;
 }
 
-.Map {
+#Map {
     flex: 0 0 70%;
     height: inherit;
 }
 
-.game {
+#game {
     /* add scrollbar within container if overflows
        auto works for Firefox and overlay works for Safari/Chrome */
     overflow-y: auto;
     overflow-y: overlay;
 }
 
-.Result ul {
+#Result ul {
     display: inline-block;
-    /* flex-direction: column;
-    flex: 1 0 auto; */
     font-size: 18px;
-    /* overflow-y: auto; */
-    /* max-height: 60vh; */
-    /* align-items: center; */
-    /* justify-content: left; */
-    /* text-transform: capitalize; */
 }
 
-.App-footer {
+footer {
     background-color: #282c34;
-    /* display: flex;
-    height: 5vh;
-    justify-content: left; */
     padding: 5px 10px;
     text-align: left;
 }
 
-.App-footer a {
+footer a {
     color: white;
     font-size: 16px;
 }
-
-/* .App-header,
-.Info,
-.main-container,
-.App-footer {
-    width: 50vw;
-}
-
-.App {
-    border: 5px solid black;
-} */

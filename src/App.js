@@ -128,8 +128,8 @@ function App() {
             );
         } else if (page === pages.GAME) {
             return (
-                <div className="main-container">
-                    <div className="game">
+                <div id="main-container">
+                    <div id="game">
                         <Form
                             addCountry={addCountry}
                             setPage={setPage}
@@ -142,7 +142,7 @@ function App() {
             );
         } else if (page === pages.END) {
             return (
-                <div className="main-container">
+                <div id="main-container">
                     <EndPage
                         setMsg={setMsg}
                         setPage={setPage}
@@ -157,11 +157,11 @@ function App() {
 
     const score = [countries.length, [...new Set(countries)].length];
     return (
-        <div className="App">
-            <header className="App-header">🔗Country Chains🔗</header>
+        <div id="App">
+            <header>🔗Country Chains🔗</header>
             <Info msg={msg} score={score} />
             {Main() /* reason for this: https://stackoverflow.com/a/65328486 */}
-            <footer className="App-footer">
+            <footer>
                 <a
                     href="https://github.com/mckwxp/country-chains"
                     target="_blank"

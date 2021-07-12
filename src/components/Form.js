@@ -22,28 +22,19 @@ function Form(props) {
     }
 
     return (
-        <div className="Form">
+        <div id="Form">
             <form onSubmit={handleSubmit} autoComplete="off">
-                <p className="label-wrapper">
-                    <label htmlFor="country-input" className="label">
-                        Enter a country name:
-                    </label>
-                </p>
+                <p>Enter a country name:</p>
                 <input
                     type="text"
-                    id="country-input"
-                    className="input"
-                    name="text"
                     autoComplete="off"
                     value={name}
                     onChange={handleChange}
                 />
-                <button type="submit" className="btn">
-                    Chain it!
-                </button>
+                <button type="submit">Chain it!</button>
             </form>
             <div>
-                <button type="button" className="btn" onClick={handleClick}>
+                <button type="button" onClick={handleClick}>
                     Finish
                 </button>
             </div>

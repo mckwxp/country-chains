@@ -8,8 +8,13 @@ import EndPage from "./components/EndPage.js";
 import Map from "./components/Map.js";
 
 function App() {
+    const [mode, setMode] = useState("land");
+
     // Data for country neighbours
-    const myjson = require("./countries_maritime.json");
+    const myjson =
+        mode === "land"
+            ? require("./countries_land.json")
+            : require("./countries_maritime.json");
 
     // Checks if the second country is a neighbour of the first country
     function checkNeighbours(first, second) {
@@ -124,6 +129,8 @@ function App() {
                     setMsg={setMsg}
                     players={players}
                     setPlayers={setPlayers}
+                    mode={mode}
+                    setMode={setMode}
                 />
             );
         } else if (page === pages.GAME) {
@@ -133,6 +140,7 @@ function App() {
                         <Form
                             addCountry={addCountry}
                             setPage={setPage}
+                            setMsg={setMsg}
                             pages={pages}
                         />
                         <Result countries={countries} players={players} />

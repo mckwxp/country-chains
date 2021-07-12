@@ -19,6 +19,7 @@ function Form(props) {
 
     function handleClick() {
         props.setPage(props.pages.END);
+        props.setMsg("Your score is:");
     }
 
     return (

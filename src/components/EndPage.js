@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function EndPage(props) {
-    useEffect(() => props.setMsg("Your score is:"));
     function handleClick() {
         props.setPage(props.pages.GAME);
         props.setMsg("Let's begin!");

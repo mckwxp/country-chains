@@ -6,16 +6,22 @@ function StartPage(props) {
         props.setPage(props.pages.GAME);
         props.setMsg("Let's begin!");
     }
-    function onValueChange(e) {
+
+    function onChangePlayers(e) {
         props.setPlayers(parseInt(e.target.value));
     }
+
+    function onChangeMode(e) {
+        props.setMode(e.target.value);
+    }
+
     return (
         <div id="StartPage">
-            <p>
-                In this game, you will create a chain of <br /> neighbouring
-                countries.
-            </p>
+            <br />
+            In this game, you will create a chain of <br /> neighbouring
+            countries.
             <form onSubmit={handleSubmit}>
+                <br />
                 Select the number of players:
                 <div>
                     <label>
@@ -24,7 +30,7 @@ function StartPage(props) {
                             id="numPlayers1"
                             value={1}
                             checked={props.players === 1}
-                            onChange={onValueChange}
+                            onChange={onChangePlayers}
                         />
                         1
                     </label>
@@ -34,7 +40,7 @@ function StartPage(props) {
                             id="numPlayers2"
                             value={2}
                             checked={props.players === 2}
-                            onChange={onValueChange}
+                            onChange={onChangePlayers}
                         />
                         2
                     </label>
@@ -44,7 +50,7 @@ function StartPage(props) {
                             id="numPlayers3"
                             value={3}
                             checked={props.players === 3}
-                            onChange={onValueChange}
+                            onChange={onChangePlayers}
                         />
                         3
                     </label>
@@ -54,11 +60,36 @@ function StartPage(props) {
                             id="numPlayers4"
                             value={4}
                             checked={props.players === 4}
-                            onChange={onValueChange}
+                            onChange={onChangePlayers}
                         />
                         4
                     </label>
                 </div>
+                <br />
+                Select the game mode:
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            id="mode1"
+                            value="land"
+                            checked={props.mode === "land"}
+                            onChange={onChangeMode}
+                        />
+                        Land
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            id="mode2"
+                            value="maritime"
+                            checked={props.mode === "maritime"}
+                            onChange={onChangeMode}
+                        />
+                        Land and Maritime
+                    </label>
+                </div>
+                <br />
                 <button type="submit">Play now!</button>
             </form>
         </div>

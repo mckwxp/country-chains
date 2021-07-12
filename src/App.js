@@ -122,6 +122,7 @@ function App() {
                     setPage={setPage}
                     pages={pages}
                     setMsg={setMsg}
+                    players={players}
                     setPlayers={setPlayers}
                 />
             );

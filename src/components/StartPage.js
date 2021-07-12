@@ -3,11 +3,11 @@ import React from "react";
 function StartPage(props) {
     function handleSubmit(e) {
         e.preventDefault();
-        if (e.target[0].value !== "DEFAULT") {
-            props.setPage(props.pages.GAME);
-            props.setMsg("Let's begin!");
-            props.setPlayers(e.target[0].value);
-        }
+        props.setPage(props.pages.GAME);
+        props.setMsg("Let's begin!");
+    }
+    function onValueChange(e) {
+        props.setPlayers(parseInt(e.target.value));
     }
     return (
         <div className="StartPage">
@@ -16,15 +16,41 @@ function StartPage(props) {
                 countries.
             </p>
             <form onSubmit={handleSubmit}>
-                <select defaultValue={"DEFAULT"}>
-                    <option value="DEFAULT" disabled>
-                        Select the number of players:
-                    </option>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                </select>
+                <p>Select the number of players:</p>
+                <div>
+                    <input
+                        type="radio"
+                        id="numPlayers1"
+                        value={1}
+                        checked={props.players === 1}
+                        onChange={onValueChange}
+                    />
+                    1
+                    <input
+                        type="radio"
+                        id="numPlayers2"
+                        value={2}
+                        checked={props.players === 2}
+                        onChange={onValueChange}
+                    />
+                    2
+                    <input
+                        type="radio"
+                        id="numPlayers3"
+                        value={3}
+                        checked={props.players === 3}
+                        onChange={onValueChange}
+                    />
+                    3
+                    <input
+                        type="radio"
+                        id="numPlayers4"
+                        value={4}
+                        checked={props.players === 4}
+                        onChange={onValueChange}
+                    />
+                    4
+                </div>
                 <button type="submit" className="btn">
                     Play now!
                 </button>

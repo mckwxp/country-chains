@@ -9,7 +9,7 @@ import Map from "./components/Map.js";
 
 function App() {
     // Data for country neighbours
-    const myjson = require("./countries.json");
+    const myjson = require("./countries_maritime.json");
 
     // Checks if the second country is a neighbour of the first country
     function checkNeighbours(first, second) {

@@ -63,18 +63,22 @@ function Map(props) {
             let country = findLatLong(
                 props.countries[props.countries.length - 1]
             );
-            return (
-                <LayersControl position="topright" collapsed={false}>
-                    <LayersControl.Overlay
-                        name="Current Location"
-                        checked={true}
-                    >
-                        <Marker
-                            position={[country.latitude, country.longitude]}
-                        ></Marker>
-                    </LayersControl.Overlay>
-                </LayersControl>
-            );
+            if (country) {
+                return (
+                    <LayersControl position="topright" collapsed={false}>
+                        <LayersControl.Overlay
+                            name="Current Location"
+                            checked={true}
+                        >
+                            <Marker
+                                position={[country.latitude, country.longitude]}
+                            ></Marker>
+                        </LayersControl.Overlay>
+                    </LayersControl>
+                );
+            } else {
+                return null;
+            }
         } else {
             return null;
         }

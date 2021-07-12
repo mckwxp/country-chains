@@ -16,7 +16,7 @@ function StartPage(props) {
                 countries.
             </p>
             <form onSubmit={handleSubmit}>
-                <p>Select the number of players:</p>
+                Select the number of players:
                 <div>
                     <input
                         type="radio"
@@ -25,7 +25,7 @@ function StartPage(props) {
                         checked={props.players === 1}
                         onChange={onValueChange}
                     />
-                    1
+                    <label>1</label>
                     <input
                         type="radio"
                         id="numPlayers2"
@@ -33,7 +33,7 @@ function StartPage(props) {
                         checked={props.players === 2}
                         onChange={onValueChange}
                     />
-                    2
+                    <label>2</label>
                     <input
                         type="radio"
                         id="numPlayers3"
@@ -41,7 +41,7 @@ function StartPage(props) {
                         checked={props.players === 3}
                         onChange={onValueChange}
                     />
-                    3
+                    <label>3</label>
                     <input
                         type="radio"
                         id="numPlayers4"
@@ -49,7 +49,7 @@ function StartPage(props) {
                         checked={props.players === 4}
                         onChange={onValueChange}
                     />
-                    4
+                    <label>4</label>
                 </div>
                 <button type="submit" className="btn">
                     Play now!

@@ -9,7 +9,7 @@ function EndPage(props) {
     return (
         <div id="EndPage">
             <p>Thanks for playing!</p>
-            <button type="button" className="btn" onClick={handleClick}>
+            <button type="button" onClick={handleClick}>
                 Play again!
             </button>
         </div>

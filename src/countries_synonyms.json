@@ -9,5 +9,7 @@
     {"country": "Guinea-Bissau", "synonyms": ["Guinea Bissau"]},
     {"country": "Eswatini", "synonyms": ["Swaziland"]},
     {"country": "North Macedonia", "synonyms": ["Macedonia", "FYROM"]},
-    {"country": "Czechia", "synonyms": ["Czech Republic"]}
+    {"country": "Czechia", "synonyms": ["Czech Republic"]},
+    {"country": "United Arab Emirates", "synonyms": ["UAE"]},
+    {"country": "Federated States of Micronesia", "synonyms": ["Micronesia"]}
 ]

@@ -8,7 +8,6 @@ import {
     Marker,
     LayersControl,
 } from "react-leaflet";
-import { nanoid } from "nanoid";
 
 function Map(props) {
     const latlongData = require("../countries_latlong.json");
@@ -37,7 +36,7 @@ function Map(props) {
                         fillOpacity: 1,
                     }}
                     radius={5}
-                    key={"id-" + nanoid()}
+                    key={"circleMarker" + i}
                 >
                     <Tooltip>{country.country}</Tooltip>
                 </CircleMarker>

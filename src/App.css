@@ -53,6 +53,22 @@ header {
     min-width: 200px;
 }
 
+#Result ul li.player0::marker {
+    color: green;
+}
+
+#Result ul li.player1::marker {
+    color: red;
+}
+
+#Result ul li.player2::marker {
+    color: blue;
+}
+
+#Result ul li.player3::marker {
+    color: orange;
+}
+
 #Map {
     flex: 0 1 70%;
     height: auto;

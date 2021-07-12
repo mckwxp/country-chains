@@ -3,9 +3,11 @@ import React from "react";
 function StartPage(props) {
     function handleSubmit(e) {
         e.preventDefault();
-        props.setPage(props.pages.GAME);
-        props.setMsg("Let's begin!");
-        props.setPlayers(e.target[0].value);
+        if (e.target[0].value !== "DEFAULT") {
+            props.setPage(props.pages.GAME);
+            props.setMsg("Let's begin!");
+            props.setPlayers(e.target[0].value);
+        }
     }
     return (
         <div className="StartPage">

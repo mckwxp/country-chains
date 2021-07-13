@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function EndPage(props) {
     function handleClick() {
@@ -15,5 +16,12 @@ function EndPage(props) {
         </div>
     );
 }
+
+EndPage.propTypes = {
+    setMsg: PropTypes.func,
+    setPage: PropTypes.func,
+    pages: PropTypes.object,
+    setCountries: PropTypes.func,
+};
 
 export default EndPage;

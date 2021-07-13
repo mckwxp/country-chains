@@ -8,6 +8,7 @@ import {
     Marker,
     LayersControl,
 } from "react-leaflet";
+import PropTypes from "prop-types";
 
 function Map(props) {
     const latlongData = require("../countries_latlong.json");
@@ -105,5 +106,10 @@ function Map(props) {
         </MapContainer>
     );
 }
+
+Map.propTypes = {
+    countries: PropTypes.array,
+    players: PropTypes.number,
+};
 
 export default Map;

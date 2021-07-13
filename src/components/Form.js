@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 function Form(props) {
     const [name, setName] = useState("");
@@ -42,5 +43,12 @@ function Form(props) {
         </div>
     );
 }
+
+Form.propTypes = {
+    addCountry: PropTypes.func,
+    setPage: PropTypes.func,
+    setMsg: PropTypes.func,
+    pages: PropTypes.object,
+};
 
 export default Form;

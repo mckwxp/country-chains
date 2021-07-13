@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Info(props) {
     return (
@@ -11,5 +12,10 @@ function Info(props) {
         </div>
     );
 }
+
+Info.propTypes = {
+    msg: PropTypes.string,
+    score: PropTypes.array,
+};
 
 export default Info;

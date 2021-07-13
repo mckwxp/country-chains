@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Result(props) {
     // converts the country list to a list
@@ -23,5 +24,10 @@ function Result(props) {
         </div>
     );
 }
+
+Result.propTypes = {
+    countries: PropTypes.array,
+    players: PropTypes.number,
+};
 
 export default Result;

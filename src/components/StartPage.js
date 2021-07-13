@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function StartPage(props) {
     function handleSubmit(e) {
@@ -95,5 +96,15 @@ function StartPage(props) {
         </div>
     );
 }
+
+StartPage.propTypes = {
+    setPage: PropTypes.func,
+    pages: PropTypes.object,
+    setMsg: PropTypes.func,
+    players: PropTypes.number,
+    setPlayers: PropTypes.func,
+    mode: PropTypes.string,
+    setMode: PropTypes.func,
+};
 
 export default StartPage;

@@ -4,11 +4,14 @@ Chain neighbouring countries around the world!
 
 Play the game at https://mckwxp.github.io/country-chains
 
-This app is written in JavaScript using React and Leaflet. 
+This app is written in JavaScript using React and Leaflet.
 
 ## Credits
+
 Country borders data: https://github.com/geodatasource/country-borders/blob/master/GEODATASOURCE-COUNTRY-BORDERS.CSV  
-This app includes Country Borders data available from <a href="https://www.geodatasource.com">https://www.geodatasource.com</a>.  
+This app includes Country Borders data available from <a href="https://www.geodatasource.com">https://www.geodatasource.com</a>.
+
+Maritime borders data: https://en.wikipedia.org/wiki/List_of_countries_and_territories_by_land_and_maritime_borders
 
 Country latitude and longitude data: https://github.com/eesur/country-codes-lat-long/blob/master/country-codes-lat-long-alpha3.json
 

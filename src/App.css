@@ -71,7 +71,6 @@ header {
 
 #Map {
     flex: 0 1 70%;
-    height: auto;
 }
 
 #game,
@@ -101,11 +100,7 @@ footer a {
 
 @media (max-width: 600px) {
     #main-container {
-        display: flex;
         flex-direction: column;
-        font-size: 18px;
-        flex: 1 1 auto;
-        min-height: 0;
     }
 
     #Form form p {
@@ -119,6 +114,5 @@ footer a {
 
     #Map {
         flex: 0 0 60%;
-        height: 60%;
     }
 }

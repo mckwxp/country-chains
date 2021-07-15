@@ -21,7 +21,7 @@
         "alpha3" : "ASM",
         "numeric" : 16,
         "latitude" : -14.3333,
-        "longitude" : -170
+        "longitude" : 190
       },
   {
         "country" : "Andorra",
@@ -397,7 +397,7 @@
         "alpha3" : "COK",
         "numeric" : 184,
         "latitude" : -21.2333,
-        "longitude" : -159.7667
+        "longitude" : 200.2333
       },
   {
         "country" : "Costa Rica",
@@ -557,7 +557,7 @@
         "alpha3" : "FJI",
         "numeric" : 242,
         "latitude" : -18,
-        "longitude" : 175
+        "longitude" : 179
       },
   {
         "country" : "Finland",
@@ -589,7 +589,7 @@
         "alpha3" : "PYF",
         "numeric" : 258,
         "latitude" : -15,
-        "longitude" : -140
+        "longitude" : 220
       },
   {
         "country" : "French Southern Territories",
@@ -1277,7 +1277,7 @@
         "alpha3" : "NIU",
         "numeric" : 570,
         "latitude" : -19.0333,
-        "longitude" : -169.8667
+        "longitude" : 190.1333
       },
   {
         "country" : "Norfolk Island",
@@ -1381,7 +1381,7 @@
         "alpha3" : "PCN",
         "numeric" : 612,
         "latitude" : -24.7,
-        "longitude" : -127.4
+        "longitude" : 232.6
       },
   {
         "country" : "Poland",
@@ -1493,7 +1493,7 @@
         "alpha3" : "WSM",
         "numeric" : 882,
         "latitude" : -13.5833,
-        "longitude" : -172.3333
+        "longitude" : 187.6666
       },
   {
         "country" : "San Marino",
@@ -1738,7 +1738,7 @@
         "alpha3" : "TKL",
         "numeric" : 772,
         "latitude" : -9,
-        "longitude" : -172
+        "longitude" : 188
       },
   {
         "country" : "Tonga",
@@ -1746,7 +1746,7 @@
         "alpha3" : "TON",
         "numeric" : 776,
         "latitude" : -20,
-        "longitude" : -175
+        "longitude" : 185
       },
   {
         "country" : "Trinidad and Tobago",
@@ -1906,7 +1906,7 @@
         "alpha3" : "WLF",
         "numeric" : 876,
         "latitude" : -13.3,
-        "longitude" : -176.2
+        "longitude" : 183.8
       },
   {
         "country" : "Western Sahara",

@@ -1,6 +1,6 @@
 [
-    {"country": "Democratic Republic of Congo", "synonyms": ["DR Congo", "DRC"]}, 
-    {"country": "Congo", "synonyms": ["Republic of Congo"]},
+    {"country": "Democratic Republic of the Congo", "synonyms": ["DR Congo", "DRC", "Democratic Republic of Congo"]}, 
+    {"country": "Republic of the Congo", "synonyms": ["Congo", "Republic of Congo"]},
     {"country": "Central African Republic", "synonyms": ["CAR"]},
     {"country": "Cote d'Ivoire", "synonyms": ["Ivory Coast", "Côte d'Ivoire"]},
     {"country": "China", "synonyms": ["PRC"]},

@@ -51,6 +51,10 @@ header {
 #EndPage {
     flex: 0 0 30%;
     min-width: 200px;
+    /* add scrollbar within container if overflows
+       auto works for Firefox and overlay works for Safari/Chrome */
+    overflow-y: auto;
+    overflow-y: overlay;
 }
 
 #Result ul li.player0::marker {
@@ -71,14 +75,6 @@ header {
 
 #Map {
     flex: 0 1 70%;
-}
-
-#game,
-#EndPage {
-    /* add scrollbar within container if overflows
-       auto works for Firefox and overlay works for Safari/Chrome */
-    overflow-y: auto;
-    overflow-y: overlay;
 }
 
 #Result ul {
@@ -107,12 +103,14 @@ footer a {
         margin: 6px;
     }
 
+    /* the two rules below are for displaying properly on iPhone
+       don't ask me why... */
     #game,
     #EndPage {
-        flex: 0 0 40%;
+        flex: 0 1 300px;
     }
 
     #Map {
-        flex: 0 0 60%;
+        flex: 1 0 45vh;
     }
 }

@@ -38,7 +38,7 @@ header {
 #main-container {
     display: flex;
     font-size: 18px;
-    flex: 1 1 auto;
+    flex: 1 1 0px;
     min-height: 0;
 }
 
@@ -103,14 +103,12 @@ footer a {
         margin: 6px;
     }
 
-    /* the two rules below are for displaying properly on iPhone
-       don't ask me why... */
     #game,
     #EndPage {
-        flex: 0 1 300px;
+        flex: 0 0 40%;
     }
 
     #Map {
-        flex: 1 0 45vh;
+        flex: 0 0 60%;
     }
 }

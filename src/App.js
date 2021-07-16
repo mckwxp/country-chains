@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Info from "./components/Info.js";
 import Form from "./components/Form.js";
 import Result from "./components/Result.js";
@@ -119,6 +119,15 @@ function App() {
 
     const [page, setPage] = useState(0);
     const pages = { START: 0, GAME: 1, END: 2 };
+
+    useEffect(() => {
+        const io = require("socket.io-client");
+        const socket = io("http://localhost:3001");
+        socket.on("connect", () => {
+            console.log("connected to server");
+        });
+        socket.emit("message", page);
+    }, [page]);
 
     function Main() {
         if (page === pages.START) {

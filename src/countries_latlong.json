@@ -920,6 +920,11 @@
         "longitude" : 127.5
       },
   {
+        "country" : "Kosovo",
+        "latitude" : 42.5,
+        "longitude" : 21
+      },
+  {
         "country" : "Kuwait",
         "alpha2" : "KW",
         "alpha3" : "KWT",

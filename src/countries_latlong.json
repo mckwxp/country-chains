@@ -48,14 +48,6 @@
         "longitude" : -63.1667
       },
   {
-        "country" : "Antarctica",
-        "alpha2" : "AQ",
-        "alpha3" : "ATA",
-        "numeric" : 10,
-        "latitude" : -90,
-        "longitude" : 0
-      },
-  {
         "country" : "Antigua and Barbuda",
         "alpha2" : "AG",
         "alpha3" : "ATG",
@@ -232,14 +224,6 @@
         "longitude" : -55
       },
   {
-        "country" : "British Indian Ocean Territory",
-        "alpha2" : "IO",
-        "alpha3" : "IOT",
-        "numeric" : 86,
-        "latitude" : -6,
-        "longitude" : 71.5
-      },
-  {
         "country" : "Brunei",
         "alpha2" : "BN",
         "alpha3" : "BRN",
@@ -352,7 +336,7 @@
         "longitude" : 105.6667
       },
   {
-        "country" : "Cocos (Keeling) Islands",
+        "country" : "Cocos Islands",
         "alpha2" : "CC",
         "alpha3" : "CCK",
         "numeric" : 166,
@@ -430,6 +414,11 @@
         "numeric" : 192,
         "latitude" : 21.5,
         "longitude" : -80
+      },
+  {
+        "country" : "Curacao",
+        "latitude" : 12.2,
+        "longitude" : -69
       },
   {
         "country" : "Cyprus",
@@ -592,14 +581,6 @@
         "longitude" : 220
       },
   {
-        "country" : "French Southern Territories",
-        "alpha2" : "TF",
-        "alpha3" : "ATF",
-        "numeric" : 260,
-        "latitude" : -43,
-        "longitude" : 67
-      },
-  {
         "country" : "Gabon",
         "alpha2" : "GA",
         "alpha3" : "GAB",
@@ -608,7 +589,7 @@
         "longitude" : 11.75
       },
   {
-        "country" : "Gambia",
+        "country" : "The Gambia",
         "alpha2" : "GM",
         "alpha3" : "GMB",
         "numeric" : 270,
@@ -744,7 +725,7 @@
         "longitude" : 72.5167
       },
   {
-        "country" : "Holy See",
+        "country" : "Vatican City",
         "alpha2" : "VA",
         "alpha3" : "VAT",
         "numeric" : 336,
@@ -1013,7 +994,7 @@
         "longitude" : 6.1667
       },
   {
-        "country" : "Macao",
+        "country" : "Macau",
         "alpha2" : "MO",
         "alpha3" : "MAC",
         "numeric" : 446,
@@ -1227,14 +1208,6 @@
         "numeric" : 528,
         "latitude" : 52.5,
         "longitude" : 5.75
-      },
-  {
-        "country" : "Netherlands Antilles",
-        "alpha2" : "AN",
-        "alpha3" : "ANT",
-        "numeric" : 530,
-        "latitude" : 12.25,
-        "longitude" : -68.75
       },
   {
         "country" : "New Caledonia",
@@ -1453,6 +1426,11 @@
         "longitude" : 30
       },
   {
+        "country" : "Saint Barthelemy",
+        "latitude" : 17.898,
+        "longitude" : -62.825
+      },
+  {
         "country" : "Saint Helena, Ascension and Tristan da Cunha",
         "alpha2" : "SH",
         "alpha3" : "SHN",
@@ -1475,6 +1453,16 @@
         "numeric" : 662,
         "latitude" : 13.8833,
         "longitude" : -61.1333
+      },
+  {
+        "country" : "Saint Martin",
+        "latitude" : 18.083,
+        "longitude" : -63.051
+      },
+  {
+        "country" : "Sint Maarten",
+        "latitude" : 18.042,
+        "longitude" : -63.051
       },
   {
         "country" : "Saint Pierre and Miquelon",
@@ -1842,14 +1830,6 @@
         "longitude" : -97
       },
   {
-        "country" : "United States Minor Outlying Islands",
-        "alpha2" : "UM",
-        "alpha3" : "UMI",
-        "numeric" : 581,
-        "latitude" : 19.2833,
-        "longitude" : 166.6
-      },
-  {
         "country" : "Uruguay",
         "alpha2" : "UY",
         "alpha3" : "URY",
@@ -1890,7 +1870,7 @@
         "longitude" : 106
       },
   {
-        "country" : "Virgin Islands, British",
+        "country" : "British Virgin Islands",
         "alpha2" : "VG",
         "alpha3" : "VGB",
         "numeric" : 92,
@@ -1898,7 +1878,7 @@
         "longitude" : -64.5
       },
   {
-        "country" : "Virgin Islands, U.S.",
+        "country" : "United States Virgin Islands",
         "alpha2" : "VI",
         "alpha3" : "VIR",
         "numeric" : 850,

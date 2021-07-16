@@ -11,5 +11,10 @@
     {"country": "North Macedonia", "synonyms": ["Macedonia", "FYROM"]},
     {"country": "Czechia", "synonyms": ["Czech Republic"]},
     {"country": "United Arab Emirates", "synonyms": ["UAE"]},
-    {"country": "Federated States of Micronesia", "synonyms": ["Micronesia"]}
+    {"country": "Federated States of Micronesia", "synonyms": ["Micronesia"]},
+    {"country": "The Gambia", "synonyms": ["Gambia"]},
+    {"country": "Pitcairn", "synonyms": ["Pitcairn Islands"]},
+    {"country": "Timor-Leste", "synonyms": ["East Timor"]},
+    {"country": "Svalbard and Jan Mayen", "synonyms": ["Svalbard", "Jan Mayen"]},
+    {"country": "Curacao", "synonyms": ["Curaçao"]}
 ]

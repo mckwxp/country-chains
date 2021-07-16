@@ -1,11 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { socket } from "./socket.js";
 
 function StartPage(props) {
     function handleSubmit(e) {
         e.preventDefault();
         props.setPage(props.pages.GAME);
         props.setMsg("Let's begin!");
+        socket.emit("begin");
+        socket.on("begin", (msg) => {
+            props.setCountries(msg);
+        });
     }
 
     function onChangePlayers(e) {

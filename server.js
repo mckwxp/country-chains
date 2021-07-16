@@ -12,10 +12,25 @@ server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+let countries = [];
+
 io.on("connection", (socket) => {
-    console.log("user connected");
+    socket.on("connect", () => {
+        console.log("connected");
+    });
+
+    socket.on("begin", () => {
+        io.emit("begin", countries);
+    });
+
     socket.on("message", (msg) => {
         console.log(`message: ${msg}`);
-        io.emit("message", msg);
+        countries.push(msg);
+        console.log(`countries: ${countries}`);
+        io.emit("reply", countries);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("disconnected");
     });
 });

@@ -8,9 +8,6 @@ function StartPage(props) {
         props.setPage(props.pages.GAME);
         props.setMsg("Let's begin!");
         socket.emit("begin");
-        socket.on("begin", (msg) => {
-            props.setCountries(msg);
-        });
     }
 
     function onChangePlayers(e) {

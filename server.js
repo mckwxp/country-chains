@@ -15,9 +15,7 @@ server.listen(port, () => {
 let countries = [];
 
 io.on("connection", (socket) => {
-    socket.on("connect", () => {
-        console.log("connected");
-    });
+    console.log("connected");
 
     socket.on("begin", () => {
         io.emit("begin", countries);
@@ -28,6 +26,16 @@ io.on("connection", (socket) => {
         countries.push(msg);
         console.log(`countries: ${countries}`);
         io.emit("reply", countries);
+    });
+
+    socket.on("end", () => {
+        io.emit("end");
+    });
+
+    socket.on("finish", () => {
+        countries = [];
+        io.emit("finish");
+        console.log("finish");
     });
 
     socket.on("disconnect", () => {

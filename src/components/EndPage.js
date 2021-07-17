@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { socket } from "./socket.js";
 
 function EndPage(props) {
     function handleClick() {
-        props.setPage(props.pages.GAME);
-        props.setMsg("Let's begin!");
-        props.setCountries([]);
+        socket.emit("finish");
     }
     return (
         <div id="EndPage">

@@ -6,6 +6,7 @@ import Result from "./components/Result.js";
 import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
 import Map from "./components/Map.js";
+import { socket } from "./components/socket.js";
 
 function App() {
     const [mode, setMode] = useState("land");
@@ -167,6 +168,21 @@ function App() {
     }
 
     const score = [countries.length, [...new Set(countries)].length];
+
+    socket.on("begin", (msg) => {
+        setCountries(msg);
+    });
+    socket.on("finish", () => {
+        setPage(pages.START);
+        setMsg("Welcome to the game!");
+        setCountries([]);
+    });
+    socket.on("end", () => {
+        setPage(pages.END);
+        setMsg("Your score is:");
+    });
+    socket.on("reply", (msg) => setCountries(msg));
+
     return (
         <div id="App">
             <header>🔗Country Chains🔗</header>

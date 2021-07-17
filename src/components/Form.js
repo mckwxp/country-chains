@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { socket } from "./socket.js";
 
 function Form(props) {
     const [name, setName] = useState("");
-
-    // useEffect(() => {
-    //     socket.emit("message", props.countries);
-    // }, [props.countries]);
-
-    // useEffect(() => {
-    //     socket.on("reply", (msg) => props.setCountries(msg));
-    //     return () => {
-    //         socket.off("reply", (msg) => props.setCountries(msg));
-    //     };
-    // }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -24,7 +13,6 @@ function Form(props) {
             if (newCountry) {
                 setName("");
                 socket.emit("message", newCountry);
-                socket.on("reply", (msg) => props.setCountries(msg));
             }
         }
     }
@@ -36,6 +24,7 @@ function Form(props) {
     function handleClick() {
         props.setPage(props.pages.END);
         props.setMsg("Your score is:");
+        socket.emit("end");
     }
 
     return (

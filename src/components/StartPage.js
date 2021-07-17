@@ -7,7 +7,11 @@ function StartPage(props) {
         e.preventDefault();
         props.setPage(props.pages.GAME);
         props.setMsg("Let's begin!");
-        socket.emit("begin");
+        socket.emit("begin", {
+            players: props.players,
+            mode: props.mode,
+            roomID: props.room,
+        });
     }
 
     function onChangePlayers(e) {
@@ -16,6 +20,10 @@ function StartPage(props) {
 
     function onChangeMode(e) {
         props.setMode(e.target.value);
+    }
+
+    function onChangeRoom(e) {
+        props.setRoom(parseInt(e.target.value));
     }
 
     return (
@@ -93,6 +101,42 @@ function StartPage(props) {
                     </label>
                 </div>
                 <br />
+                <div>
+                    Select a room:
+                    <div>
+                        {props.rooms.length > 0 ? (
+                            props.rooms.map((r) => {
+                                return (
+                                    <label key={"room" + r.id}>
+                                        <input
+                                            type="radio"
+                                            value={r.id}
+                                            checked={props.room === r.id}
+                                            onChange={onChangeRoom}
+                                        />
+                                        {"Room " + r.id}
+                                    </label>
+                                );
+                            })
+                        ) : (
+                            <div>There are no rooms available</div>
+                        )}
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            socket.emit("createroom", {
+                                players: props.players,
+                                mode: props.mode,
+                            });
+                        }}
+                    >
+                        Create a new room
+                    </button>
+                </div>
                 <button type="submit">Play now!</button>
             </form>
         </div>
@@ -107,6 +151,10 @@ StartPage.propTypes = {
     setPlayers: PropTypes.func,
     mode: PropTypes.string,
     setMode: PropTypes.func,
+    setCountries: PropTypes.func,
+    rooms: PropTypes.array,
+    room: PropTypes.number,
+    setRoom: PropTypes.func,
 };
 
 export default StartPage;

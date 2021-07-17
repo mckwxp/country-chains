@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Info from "./components/Info.js";
 import Form from "./components/Form.js";
 import Result from "./components/Result.js";
@@ -121,6 +121,9 @@ function App() {
     const [page, setPage] = useState(0);
     const pages = { START: 0, GAME: 1, END: 2 };
 
+    const [rooms, setRooms] = useState([]);
+    const [room, setRoom] = useState(0);
+
     function Main() {
         if (page === pages.START) {
             return (
@@ -133,6 +136,9 @@ function App() {
                     mode={mode}
                     setMode={setMode}
                     setCountries={setCountries}
+                    rooms={rooms}
+                    room={room}
+                    setRoom={setRoom}
                 />
             );
         } else if (page === pages.GAME) {
@@ -146,6 +152,7 @@ function App() {
                             setPage={setPage}
                             setMsg={setMsg}
                             pages={pages}
+                            room={room}
                         />
                         <Result countries={countries} players={players} />
                     </div>
@@ -169,19 +176,24 @@ function App() {
 
     const score = [countries.length, [...new Set(countries)].length];
 
-    socket.on("begin", (msg) => {
-        setCountries(msg);
+    useEffect(() => {
+        socket.on("showRooms", (msg) => {
+            setRooms(msg);
+        });
+        socket.on("begin", (msg) => {
+            setCountries(msg);
+        });
+        socket.on("finish", () => {
+            setPage(pages.START);
+            setMsg("Welcome to the game!");
+            setCountries([]);
+        });
+        socket.on("end", () => {
+            setPage(pages.END);
+            setMsg("Your score is:");
+        });
+        socket.on("reply", (msg) => setCountries(msg));
     });
-    socket.on("finish", () => {
-        setPage(pages.START);
-        setMsg("Welcome to the game!");
-        setCountries([]);
-    });
-    socket.on("end", () => {
-        setPage(pages.END);
-        setMsg("Your score is:");
-    });
-    socket.on("reply", (msg) => setCountries(msg));
 
     return (
         <div id="App">

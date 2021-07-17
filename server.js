@@ -12,28 +12,41 @@ server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-let countries = [];
+let rooms = [];
 
 io.on("connection", (socket) => {
     console.log("connected");
+    io.emit("showRooms", rooms);
 
-    socket.on("begin", () => {
-        io.emit("begin", countries);
+    socket.on("createroom", (msg) => {
+        let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
+        rooms.push({
+            id: maxID + 1,
+            players: msg.players,
+            mode: msg.mode,
+            countries: [],
+        });
+        io.emit("showRooms", rooms);
+    });
+
+    socket.on("begin", (msg) => {
+        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        io.emit("begin", r.countries);
     });
 
     socket.on("message", (msg) => {
-        console.log(`message: ${msg}`);
-        countries.push(msg);
-        console.log(`countries: ${countries}`);
-        io.emit("reply", countries);
+        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        r.countries.push(msg.country);
+        io.emit("reply", r.countries);
     });
 
     socket.on("end", () => {
         io.emit("end");
     });
 
-    socket.on("finish", () => {
-        countries = [];
+    socket.on("finish", (msg) => {
+        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        r.countries = [];
         io.emit("finish");
         console.log("finish");
     });

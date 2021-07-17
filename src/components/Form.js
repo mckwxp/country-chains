@@ -12,7 +12,10 @@ function Form(props) {
             let newCountry = props.addCountry(countryName);
             if (newCountry) {
                 setName("");
-                socket.emit("message", newCountry);
+                socket.emit("message", {
+                    roomID: props.room,
+                    country: newCountry,
+                });
             }
         }
     }

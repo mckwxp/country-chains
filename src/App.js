@@ -124,6 +124,8 @@ function App() {
     const [rooms, setRooms] = useState([]);
     const [room, setRoom] = useState(0);
 
+    const [joined, setJoined] = useState("false");
+
     function Main() {
         if (page === pages.START) {
             return (
@@ -139,6 +141,8 @@ function App() {
                     rooms={rooms}
                     room={room}
                     setRoom={setRoom}
+                    joined={joined}
+                    setJoined={setJoined}
                 />
             );
         } else if (page === pages.GAME) {
@@ -179,6 +183,10 @@ function App() {
     useEffect(() => {
         socket.on("showRooms", (msg) => {
             setRooms(msg);
+        });
+        socket.on("joinFailed", (msg) => {
+            setJoined("failed");
+            console.log("Failed to join room");
         });
         socket.on("begin", (msg) => {
             setCountries(msg);

@@ -18,20 +18,32 @@ io.on("connection", (socket) => {
     console.log("connected");
     io.emit("showRooms", rooms);
 
-    socket.on("createroom", (msg) => {
+    socket.on("createroom", () => {
         let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
         rooms.push({
             id: maxID + 1,
-            players: msg.players,
-            mode: msg.mode,
+            players: null,
+            mode: null,
             countries: [],
         });
+        io.emit("showRooms", rooms);
+        console.log(rooms);
+    });
+
+    socket.on("configureRoom", (msg) => {
+        console.log(msg, rooms[msg.roomID - 1]);
+        rooms[msg.roomID - 1].players = msg.players;
+        rooms[msg.roomID - 1].mode = msg.mode;
         io.emit("showRooms", rooms);
     });
 
     socket.on("begin", (msg) => {
         let r = rooms.filter((r) => r.id === msg.roomID)[0];
-        io.emit("begin", r.countries);
+        if (r.players === msg.players && r.mode === msg.mode) {
+            io.emit("begin", r.countries);
+        } else {
+            io.emit("joinFailed", r.id);
+        }
     });
 
     socket.on("message", (msg) => {

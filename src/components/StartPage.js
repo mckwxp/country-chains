@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { socket } from "./socket.js";
 
 function StartPage(props) {
     function handleSubmit(e) {
         e.preventDefault();
-        props.setPage(props.pages.GAME);
-        props.setMsg("Let's begin!");
-        socket.emit("begin", {
-            players: props.players,
-            mode: props.mode,
-            roomID: props.room,
-        });
+
+        if (!props.room) {
+            alert(
+                "Please choose a room (or create one and join if there are no rooms)"
+            );
+        } else {
+            socket.emit("configureRoom", {
+                players: props.players,
+                mode: props.mode,
+                roomID: props.room,
+            });
+
+            socket.emit("begin", {
+                players: props.players,
+                mode: props.mode,
+                roomID: props.room,
+            });
+            props.setPage(props.pages.GAME);
+            props.setMsg("Let's begin!");
+        }
     }
 
     function onChangePlayers(e) {
@@ -25,6 +38,17 @@ function StartPage(props) {
     function onChangeRoom(e) {
         props.setRoom(parseInt(e.target.value));
     }
+
+    useEffect(() => {
+        let r = props.rooms.filter((r) => r.id === props.room)[0];
+        if (r) {
+            if (r.mode && r.players) {
+                console.log(r);
+                props.setMode(r.mode);
+                props.setPlayers(r.players);
+            }
+        }
+    }, [props]);
 
     return (
         <div id="StartPage">

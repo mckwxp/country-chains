@@ -31,9 +31,10 @@ io.on("connection", (socket) => {
     });
 
     socket.on("configureRoom", (msg) => {
-        console.log(msg, rooms[msg.roomID - 1]);
-        rooms[msg.roomID - 1].players = msg.players;
-        rooms[msg.roomID - 1].mode = msg.mode;
+        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        console.log(msg, r);
+        r.players = msg.players;
+        r.mode = msg.mode;
         io.emit("showRooms", rooms);
     });
 

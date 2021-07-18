@@ -1,12 +1,11 @@
-const app = require("express")();
+const express = require("express");
+const path = require("path");
+const app = express();
+app.use(express.static(path.join(__dirname, "build")));
+const port = process.env.PORT || 3001;
+
 const server = require("http").Server(app);
-const io = require("socket.io")(server, {
-    cors: {
-        origin: "http://localhost:3000",
-        methods: ["GET", "POST"],
-    },
-});
-const port = 3001;
+const io = require("socket.io")(server);
 
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
@@ -27,12 +26,12 @@ io.on("connection", (socket) => {
             countries: [],
         });
         io.emit("showRooms", rooms);
-        console.log(rooms);
+        console.log("Room created");
     });
 
     socket.on("configureRoom", (msg) => {
         let r = rooms.filter((r) => r.id === msg.roomID)[0];
-        console.log(msg, r);
+        console.log("Room configured");
         r.players = msg.players;
         r.mode = msg.mode;
         io.emit("showRooms", rooms);

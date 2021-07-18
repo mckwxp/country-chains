@@ -27,7 +27,9 @@ function Form(props) {
     function handleClick() {
         props.setPage(props.pages.END);
         props.setMsg("Your score is:");
-        socket.emit("end");
+        socket.emit("end", {
+            roomID: props.room,
+        });
     }
 
     return (
@@ -57,6 +59,7 @@ Form.propTypes = {
     setPage: PropTypes.func,
     setMsg: PropTypes.func,
     pages: PropTypes.object,
+    room: PropTypes.number,
 };
 
 export default Form;

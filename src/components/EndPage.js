@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { socket } from "./socket.js";
 
 function EndPage(props) {
     function handleClick() {
-        socket.emit("finish");
+        props.setPage(props.pages.START);
+        props.setMsg("Welcome to the game!");
+        props.setCountries([]);
+        props.setRoom(null);
     }
     return (
         <div id="EndPage">
@@ -21,6 +23,8 @@ EndPage.propTypes = {
     setPage: PropTypes.func,
     pages: PropTypes.object,
     setCountries: PropTypes.func,
+    room: PropTypes.number,
+    setRoom: PropTypes.func,
 };
 
 export default EndPage;

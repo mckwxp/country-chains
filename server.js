@@ -52,15 +52,12 @@ io.on("connection", (socket) => {
         io.emit("reply", r.countries);
     });
 
-    socket.on("end", () => {
-        io.emit("end");
-    });
-
-    socket.on("finish", (msg) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0];
-        r.countries = [];
-        io.emit("finish");
-        console.log("finish");
+    socket.on("end", (msg) => {
+        io.emit("end", msg.roomID);
+        // remove the room
+        rooms = rooms.filter((r) => r.id !== msg.roomID);
+        console.log(`Room ${msg.roomID} removed`);
+        io.emit("showRooms", rooms);
     });
 
     socket.on("disconnect", () => {

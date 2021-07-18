@@ -43,7 +43,6 @@ function StartPage(props) {
         let r = props.rooms.filter((r) => r.id === props.room)[0];
         if (r) {
             if (r.mode && r.players) {
-                console.log(r);
                 props.setMode(r.mode);
                 props.setPlayers(r.players);
             }
@@ -175,7 +174,6 @@ StartPage.propTypes = {
     setPlayers: PropTypes.func,
     mode: PropTypes.string,
     setMode: PropTypes.func,
-    setCountries: PropTypes.func,
     rooms: PropTypes.array,
     room: PropTypes.number,
     setRoom: PropTypes.func,

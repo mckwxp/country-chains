@@ -122,9 +122,7 @@ function App() {
     const pages = { START: 0, GAME: 1, END: 2 };
 
     const [rooms, setRooms] = useState([]);
-    const [room, setRoom] = useState(0);
-
-    const [joined, setJoined] = useState("false");
+    const [room, setRoom] = useState(null);
 
     function Main() {
         if (page === pages.START) {
@@ -141,8 +139,6 @@ function App() {
                     rooms={rooms}
                     room={room}
                     setRoom={setRoom}
-                    joined={joined}
-                    setJoined={setJoined}
                 />
             );
         } else if (page === pages.GAME) {
@@ -152,7 +148,6 @@ function App() {
                         <Form
                             addCountry={addCountry}
                             countries={countries}
-                            setCountries={setCountries}
                             setPage={setPage}
                             setMsg={setMsg}
                             pages={pages}
@@ -171,6 +166,8 @@ function App() {
                         setPage={setPage}
                         pages={pages}
                         setCountries={setCountries}
+                        room={room}
+                        setRoom={setRoom}
                     />
                     <Map countries={countries} players={players} />
                 </div>
@@ -185,16 +182,10 @@ function App() {
             setRooms(msg);
         });
         socket.on("joinFailed", (msg) => {
-            setJoined("failed");
             console.log("Failed to join room");
         });
         socket.on("begin", (msg) => {
             setCountries(msg);
-        });
-        socket.on("finish", () => {
-            setPage(pages.START);
-            setMsg("Welcome to the game!");
-            setCountries([]);
         });
         socket.on("end", () => {
             setPage(pages.END);

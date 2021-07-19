@@ -2,6 +2,9 @@ const express = require("express");
 const path = require("path");
 const app = express();
 app.use(express.static(path.join(__dirname, "build")));
+
+const proxy = require("html2canvas-proxy");
+app.use("/proxy", proxy());
 const port = process.env.PORT || 3001;
 
 const server = require("http").Server(app);

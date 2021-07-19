@@ -7,6 +7,7 @@ import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
 import Map from "./components/Map.js";
 import { socket } from "./components/socket.js";
+import html2canvas from "html2canvas";
 
 function App() {
     const [mode, setMode] = useState("land");
@@ -194,6 +195,21 @@ function App() {
         socket.on("reply", (msg) => setCountries(msg));
     });
 
+    function saveScreenshot() {
+        html2canvas(document.body, {
+            proxy: "/proxy",
+        }).then((canvas) => {
+            let link = document.createElement("a");
+            if (typeof link.download === "string") {
+                link.href = canvas.toDataURL();
+                link.download = "screenshot.png";
+                link.click();
+            } else {
+                window.open(canvas.toDataURL());
+            }
+        });
+    }
+
     return (
         <div id="App">
             <header>🔗Country Chains🔗</header>
@@ -208,6 +224,14 @@ function App() {
                     Source code on GitHub
                 </a>
             </footer>
+            <div id="screenshot">
+                <button onClick={saveScreenshot}>
+                    <img
+                        src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMuMiIvPgogICAgPHBhdGggZD0iTTkgMkw3LjE3IDRINGMtMS4xIDAtMiAuOS0yIDJ2MTJjMCAxLjEuOSAyIDIgMmgxNmMxLjEgMCAyLS45IDItMlY2YzAtMS4xLS45LTItMi0yaC0zLjE3TDE1IDJIOXptMyAxNWMtMi43NiAwLTUtMi4yNC01LTVzMi4yNC01IDUtNSA1IDIuMjQgNSA1LTIuMjQgNS01IDV6Ii8+CiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+Cjwvc3ZnPgo="
+                        alt="Take a screenshot"
+                    />
+                </button>
+            </div>
         </div>
     );
 }

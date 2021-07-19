@@ -16,12 +16,6 @@ function StartPage(props) {
                 mode: props.mode,
                 roomID: props.room,
             });
-
-            socket.emit("begin", {
-                players: props.players,
-                mode: props.mode,
-                roomID: props.room,
-            });
             props.setPage(props.pages.GAME);
             props.setMsg("Let's begin!");
         }

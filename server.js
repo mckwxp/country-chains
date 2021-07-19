@@ -15,7 +15,7 @@ let rooms = [];
 
 io.on("connection", (socket) => {
     console.log("connected");
-    io.emit("showRooms", rooms);
+    socket.emit("updateRooms", rooms);
 
     socket.on("createroom", () => {
         let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
@@ -25,7 +25,7 @@ io.on("connection", (socket) => {
             mode: null,
             countries: [],
         });
-        io.emit("showRooms", rooms);
+        io.emit("updateRooms", rooms);
         console.log("Room created");
     });
 
@@ -34,30 +34,24 @@ io.on("connection", (socket) => {
         console.log("Room configured");
         r.players = msg.players;
         r.mode = msg.mode;
-        io.emit("showRooms", rooms);
-    });
-
-    socket.on("begin", (msg) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0];
-        if (r.players === msg.players && r.mode === msg.mode) {
-            io.emit("begin", r.countries);
-        } else {
-            io.emit("joinFailed", r.id);
-        }
+        io.emit("updateRooms", rooms);
+        socket.emit("begin", r.countries);
+        socket.join(r.id);
     });
 
     socket.on("message", (msg) => {
         let r = rooms.filter((r) => r.id === msg.roomID)[0];
         r.countries.push(msg.country);
-        io.emit("reply", r.countries);
+        io.to(r.id).emit("reply", r.countries);
     });
 
     socket.on("end", (msg) => {
-        io.emit("end", msg.roomID);
+        io.to(msg.roomID).emit("end");
+        socket.leave(msg.roomID);
         // remove the room
         rooms = rooms.filter((r) => r.id !== msg.roomID);
         console.log(`Room ${msg.roomID} removed`);
-        io.emit("showRooms", rooms);
+        io.emit("updateRooms", rooms);
     });
 
     socket.on("disconnect", () => {

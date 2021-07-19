@@ -178,7 +178,7 @@ function App() {
     const score = [countries.length, [...new Set(countries)].length];
 
     useEffect(() => {
-        socket.on("showRooms", (msg) => {
+        socket.on("updateRooms", (msg) => {
             setRooms(msg);
         });
         socket.on("joinFailed", (msg) => {

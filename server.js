@@ -24,6 +24,7 @@ io.on("connection", (socket) => {
             players: null,
             mode: null,
             countries: [],
+            playersInRoom: [],
         });
         io.emit("updateRooms", rooms);
         console.log("Room created");
@@ -34,9 +35,14 @@ io.on("connection", (socket) => {
         console.log("Room configured");
         r.players = msg.players;
         r.mode = msg.mode;
+        r.playersInRoom.push({
+            id: socket.id,
+            username: msg.username ?? "guest",
+        });
         io.emit("updateRooms", rooms);
         socket.emit("begin", r.countries);
         socket.join(r.id);
+        io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom);
     });
 
     socket.on("message", (msg) => {

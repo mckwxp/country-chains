@@ -71,6 +71,9 @@ function App() {
     // State for number of players
     const [players, setPlayers] = useState(1);
 
+    // State for players present in room
+    const [playersInRoom, setPlayersInRoom] = useState([]);
+
     // Core logic to check if the entered country is a neighbour of the most recent one
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
@@ -156,6 +159,17 @@ function App() {
                         <Result countries={countries} players={players} />
                     </div>
                     <Map countries={countries} players={players} />
+                    <div id="playersInRoom">
+                        You are in Room {room}.
+                        <br />
+                        Online players: {playersInRoom.length}
+                        <br />
+                        <ul>
+                            {playersInRoom.map((p) => {
+                                return <li>{p.username}</li>;
+                            })}
+                        </ul>
+                    </div>
                 </div>
             );
         } else if (page === pages.END) {
@@ -180,6 +194,9 @@ function App() {
     useEffect(() => {
         socket.on("updateRooms", (msg) => {
             setRooms(msg);
+        });
+        socket.on("updatePlayersInRoom", (msg) => {
+            setPlayersInRoom(msg);
         });
         socket.on("joinFailed", (msg) => {
             console.log("Failed to join room");

@@ -49,7 +49,7 @@ header {
 
 #game,
 #EndPage {
-    flex: 0 0 30%;
+    flex: 0 0 25%;
     min-width: 200px;
     /* add scrollbar within container if overflows
        auto works for Firefox and overlay works for Safari/Chrome */
@@ -74,12 +74,23 @@ header {
 }
 
 #Map {
-    flex: 0 1 70%;
+    flex: 0 1 60%;
 }
 
 #Result ul {
     display: inline-block;
     font-size: 18px;
+}
+
+#playersInRoom {
+    flex: 0 1 15%;
+    overflow: auto;
+}
+
+#playersInRoom ul {
+    font-size: 18px;
+    list-style: none;
+    padding: 0;
 }
 
 footer {
@@ -105,10 +116,32 @@ footer a {
 
     #game,
     #EndPage {
-        flex: 0 0 40%;
+        flex: 0 0 30%;
     }
 
     #Map {
         flex: 0 0 60%;
+    }
+
+    #playersInRoom {
+        flex: 0 0 10%;
+    }
+
+    /* remove new line for mobile layout */
+    #playersInRoom br {
+        content: " ";
+    }
+
+    #playersInRoom br:after {
+        content: " ";
+    }
+
+    #playersInRoom ul {
+        margin: 0;
+    }
+
+    #playersInRoom ul li {
+        display: inline-block;
+        margin: 0 10px;
     }
 }

@@ -15,6 +15,7 @@ function StartPage(props) {
                 players: props.players,
                 mode: props.mode,
                 roomID: props.room,
+                // username: props.username,
             });
             props.setPage(props.pages.GAME);
             props.setMsg("Let's begin!");
@@ -52,70 +53,39 @@ function StartPage(props) {
                 <br />
                 Select the number of players:
                 <div>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers1"
-                            value={1}
-                            checked={props.players === 1}
-                            onChange={onChangePlayers}
-                        />
-                        1
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers2"
-                            value={2}
-                            checked={props.players === 2}
-                            onChange={onChangePlayers}
-                        />
-                        2
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers3"
-                            value={3}
-                            checked={props.players === 3}
-                            onChange={onChangePlayers}
-                        />
-                        3
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers4"
-                            value={4}
-                            checked={props.players === 4}
-                            onChange={onChangePlayers}
-                        />
-                        4
-                    </label>
+                    {[1, 2, 3, 4].map((x) => {
+                        return (
+                            <label key={"numPlayers" + x}>
+                                <input
+                                    type="radio"
+                                    value={x}
+                                    checked={props.players === x}
+                                    onChange={onChangePlayers}
+                                />
+                                {x}
+                            </label>
+                        );
+                    })}
                 </div>
                 <br />
                 Select the game mode:
                 <div>
-                    <label>
-                        <input
-                            type="radio"
-                            id="mode1"
-                            value="land"
-                            checked={props.mode === "land"}
-                            onChange={onChangeMode}
-                        />
-                        Land
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="mode2"
-                            value="maritime"
-                            checked={props.mode === "maritime"}
-                            onChange={onChangeMode}
-                        />
-                        Land and Maritime
-                    </label>
+                    {[
+                        { mode: "land", label: "Land" },
+                        { mode: "maritime", label: "Land and maritime" },
+                    ].map((x) => {
+                        return (
+                            <label key={"mode" + x}>
+                                <input
+                                    type="radio"
+                                    value={x.mode}
+                                    checked={props.mode === x.mode}
+                                    onChange={onChangeMode}
+                                />
+                                {x.label}
+                            </label>
+                        );
+                    })}
                 </div>
                 <br />
                 <div>

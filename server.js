@@ -61,6 +61,24 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
+        // find which room the user is in
+        // (should be just one room, but keep as array just in case)
+        let inRoom = rooms.filter(
+            (r) =>
+                r.playersInRoom.filter((p) => p.id === socket.id).length !== 0
+        );
+
+        // remove player from room
+        rooms = rooms.map((r) => {
+            r.playersInRoom = r.playersInRoom.filter((p) => p.id !== socket.id);
+            return r;
+        });
+
+        // broadcast updated player list to each room
+        inRoom.forEach((r) =>
+            io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom)
+        );
+
         console.log("disconnected");
     });
 });

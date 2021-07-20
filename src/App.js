@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Info from "./components/Info.js";
 import Form from "./components/Form.js";
 import Result from "./components/Result.js";
+import Players from "./components/Players.js";
 import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
 import Map from "./components/Map.js";
@@ -159,17 +160,7 @@ function App() {
                         <Result countries={countries} players={players} />
                     </div>
                     <Map countries={countries} players={players} />
-                    <div id="playersInRoom">
-                        You are in Room {room}.
-                        <br />
-                        Online players: {playersInRoom.length}
-                        <br />
-                        <ul>
-                            {playersInRoom.map((p) => {
-                                return <li>{p.username}</li>;
-                            })}
-                        </ul>
-                    </div>
+                    <Players room={room} playersInRoom={playersInRoom} />
                 </div>
             );
         } else if (page === pages.END) {
@@ -184,6 +175,7 @@ function App() {
                         setRoom={setRoom}
                     />
                     <Map countries={countries} players={players} />
+                    <Players room={room} playersInRoom={playersInRoom} />
                 </div>
             );
         }

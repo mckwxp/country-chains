@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { socket } from "./socket.js";
 
 function StartPage(props) {
+    const [username, setUsername] = useState("");
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -10,12 +12,14 @@ function StartPage(props) {
             alert(
                 "Please choose a room (or create one and join if there are no rooms)"
             );
+        } else if (!username.trim()) {
+            alert("Please enter your player name");
         } else {
             socket.emit("configureRoom", {
                 players: props.players,
                 mode: props.mode,
                 roomID: props.room,
-                // username: props.username,
+                username: username,
             });
             props.setPage(props.pages.GAME);
             props.setMsg("Let's begin!");
@@ -32,6 +36,10 @@ function StartPage(props) {
 
     function onChangeRoom(e) {
         props.setRoom(parseInt(e.target.value));
+    }
+
+    function onchangeUsername(e) {
+        setUsername(e.target.value);
     }
 
     useEffect(() => {
@@ -113,6 +121,7 @@ function StartPage(props) {
                 <br />
                 <div>
                     <button
+                        type="button"
                         onClick={(e) => {
                             e.preventDefault();
                             socket.emit("createroom", {
@@ -124,6 +133,14 @@ function StartPage(props) {
                         Create a new room
                     </button>
                 </div>
+                <br />
+                Enter your player name:
+                <br />
+                <input
+                    type="text"
+                    value={username}
+                    onChange={onchangeUsername}
+                />
                 <button type="submit">Play now!</button>
             </form>
         </div>
@@ -141,6 +158,8 @@ StartPage.propTypes = {
     rooms: PropTypes.array,
     room: PropTypes.number,
     setRoom: PropTypes.func,
+    username: PropTypes.string,
+    setUserName: PropTypes.func,
 };
 
 export default StartPage;

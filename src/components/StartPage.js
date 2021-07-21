@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { socket } from "./socket.js";
 
 function StartPage(props) {
-    const [username, setUsername] = useState("");
-
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -12,14 +10,14 @@ function StartPage(props) {
             alert(
                 "Please choose a room (or create one and join if there are no rooms)"
             );
-        } else if (!username.trim()) {
+        } else if (!props.username.trim()) {
             alert("Please enter your player name");
         } else {
             socket.emit("configureRoom", {
                 players: props.players,
                 mode: props.mode,
                 roomID: props.room,
-                username: username,
+                username: props.username,
             });
             props.setPage(props.pages.GAME);
             props.setMsg("Let's begin!");
@@ -39,7 +37,7 @@ function StartPage(props) {
     }
 
     function onchangeUsername(e) {
-        setUsername(e.target.value);
+        props.setUsername(e.target.value);
     }
 
     useEffect(() => {
@@ -138,7 +136,7 @@ function StartPage(props) {
                 <br />
                 <input
                     type="text"
-                    value={username}
+                    value={props.username}
                     onChange={onchangeUsername}
                 />
                 <button type="submit">Play now!</button>

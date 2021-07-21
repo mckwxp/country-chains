@@ -7,6 +7,15 @@ function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (
+            props.playersInRoom.findIndex(
+                (x) => x.username === props.username
+            ) !==
+            props.countries.length % props.playersInRoom.length
+        ) {
+            alert("It's not your turn");
+            return;
+        }
         const countryName = name.trim();
         if (countryName !== "") {
             let newCountry = props.addCountry(countryName);

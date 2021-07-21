@@ -75,6 +75,9 @@ function App() {
     // State for players present in room
     const [playersInRoom, setPlayersInRoom] = useState([]);
 
+    // State for current username
+    const [username, setUsername] = useState("");
+
     // Core logic to check if the entered country is a neighbour of the most recent one
     // Sets message panel and results panel accordingly
     // Returns Boolean to indicate if country is successfully added to the array
@@ -143,6 +146,8 @@ function App() {
                     rooms={rooms}
                     room={room}
                     setRoom={setRoom}
+                    username={username}
+                    setUsername={setUsername}
                 />
             );
         } else if (page === pages.GAME) {
@@ -156,6 +161,8 @@ function App() {
                             setMsg={setMsg}
                             pages={pages}
                             room={room}
+                            username={username}
+                            playersInRoom={playersInRoom}
                         />
                         <Result countries={countries} players={players} />
                     </div>

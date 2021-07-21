@@ -57,19 +57,19 @@ header {
     overflow-y: overlay;
 }
 
-#Result ul li.player0::marker {
+ul li.player0::marker {
     color: green;
 }
 
-#Result ul li.player1::marker {
+ul li.player1::marker {
     color: red;
 }
 
-#Result ul li.player2::marker {
+ul li.player2::marker {
     color: blue;
 }
 
-#Result ul li.player3::marker {
+ul li.player3::marker {
     color: orange;
 }
 
@@ -77,20 +77,15 @@ header {
     flex: 0 1 60%;
 }
 
-#Result ul {
+ul {
     display: inline-block;
     font-size: 18px;
+    padding: 0;
 }
 
 #playersInRoom {
     flex: 0 1 15%;
     overflow: auto;
-}
-
-#playersInRoom ul {
-    font-size: 18px;
-    list-style: none;
-    padding: 0;
 }
 
 footer {

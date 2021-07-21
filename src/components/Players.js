@@ -9,8 +9,8 @@ function Players(props) {
             Online players: {props.playersInRoom.length}
             <br />
             <ul>
-                {props.playersInRoom.map((p) => {
-                    return <li>{p.username}</li>;
+                {props.playersInRoom.map((p, i) => {
+                    return <li className={`player${i % 4}`}>{p.username}</li>;
                 })}
             </ul>
         </div>

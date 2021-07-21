@@ -10,7 +10,19 @@ function Players(props) {
             <br />
             <ul>
                 {props.playersInRoom.map((p, i) => {
-                    return <li className={`player${i % 4}`}>{p.username}</li>;
+                    return (
+                        <li
+                            className={`player${i}${
+                                props.countries.length %
+                                    props.playersInRoom.length ===
+                                i
+                                    ? " currentPlayer"
+                                    : ""
+                            }`}
+                        >
+                            {p.username}
+                        </li>
+                    );
                 })}
             </ul>
         </div>
@@ -20,6 +32,7 @@ function Players(props) {
 Players.propTypes = {
     room: PropTypes.number,
     playersInRoom: PropTypes.array,
+    countries: PropTypes.array,
 };
 
 export default Players;

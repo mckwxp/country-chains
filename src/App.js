@@ -160,7 +160,11 @@ function App() {
                         <Result countries={countries} players={players} />
                     </div>
                     <Map countries={countries} players={players} />
-                    <Players room={room} playersInRoom={playersInRoom} />
+                    <Players
+                        room={room}
+                        playersInRoom={playersInRoom}
+                        countries={countries}
+                    />
                 </div>
             );
         } else if (page === pages.END) {
@@ -175,7 +179,11 @@ function App() {
                         setRoom={setRoom}
                     />
                     <Map countries={countries} players={players} />
-                    <Players room={room} playersInRoom={playersInRoom} />
+                    <Players
+                        room={room}
+                        playersInRoom={playersInRoom}
+                        countries={countries}
+                    />
                 </div>
             );
         }

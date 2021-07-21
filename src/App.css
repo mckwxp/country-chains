@@ -57,6 +57,10 @@ header {
     overflow-y: overlay;
 }
 
+#playersInRoom {
+    min-width: 150px;
+}
+
 ul li.player0::marker {
     color: green;
 }
@@ -86,6 +90,21 @@ ul {
 #playersInRoom {
     flex: 0 1 15%;
     overflow: auto;
+}
+
+@keyframes borderBlink {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+
+#playersInRoom ul li.currentPlayer {
+    border: 1px solid black;
+    animation: borderBlink 1s step-end infinite;
 }
 
 footer {

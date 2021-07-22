@@ -1,8 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import Info from "./components/Info.js";
-import Form from "./components/Form.js";
-import Result from "./components/Result.js";
+import Game from "./components/Game.js";
 import Players from "./components/Players.js";
 import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
@@ -148,21 +147,15 @@ function App() {
         } else if (page === "GAME") {
             return (
                 <div id="main-container">
-                    <div id="game">
-                        <Form
-                            addCountry={addCountry}
-                            countries={countries}
-                            setPage={setPage}
-                            setMsg={setMsg}
-                            room={room}
-                            username={username}
-                            playersInRoom={playersInRoom}
-                        />
-                        <Result
-                            countries={countries}
-                            playersInRoom={playersInRoom}
-                        />
-                    </div>
+                    <Game
+                        addCountry={addCountry}
+                        countries={countries}
+                        setPage={setPage}
+                        setMsg={setMsg}
+                        room={room}
+                        username={username}
+                        playersInRoom={playersInRoom}
+                    />
                     <Map countries={countries} playersInRoom={playersInRoom} />
                     <Players
                         page={page}

@@ -69,9 +69,6 @@ function App() {
     // State for results panel; contains an array of countries
     const [countries, setCountries] = useState([]);
 
-    // State for number of players
-    const [players, setPlayers] = useState(1);
-
     // State for players present in room
     const [playersInRoom, setPlayersInRoom] = useState([]);
 
@@ -136,8 +133,6 @@ function App() {
                 <StartPage
                     setPage={setPage}
                     setMsg={setMsg}
-                    players={players}
-                    setPlayers={setPlayers}
                     mode={mode}
                     setMode={setMode}
                     setCountries={setCountries}

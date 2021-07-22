@@ -21,7 +21,6 @@ io.on("connection", (socket) => {
         let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
         rooms.push({
             id: maxID + 1,
-            players: null,
             mode: null,
             countries: [],
             playersInRoom: [],
@@ -33,7 +32,6 @@ io.on("connection", (socket) => {
     socket.on("configureRoom", (msg) => {
         let r = rooms.filter((r) => r.id === msg.roomID)[0];
         console.log("Room configured");
-        r.players = msg.players;
         r.mode = msg.mode;
         r.playersInRoom.push({
             id: socket.id,

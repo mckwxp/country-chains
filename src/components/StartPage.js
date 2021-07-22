@@ -14,7 +14,6 @@ function StartPage(props) {
             alert("Please enter your player name");
         } else {
             socket.emit("configureRoom", {
-                players: props.players,
                 mode: props.mode,
                 roomID: props.room,
                 username: props.username,
@@ -22,10 +21,6 @@ function StartPage(props) {
             props.setPage("GAME");
             props.setMsg("Let's begin!");
         }
-    }
-
-    function onChangePlayers(e) {
-        props.setPlayers(parseInt(e.target.value));
     }
 
     function onChangeMode(e) {
@@ -43,9 +38,8 @@ function StartPage(props) {
     useEffect(() => {
         let r = props.rooms.filter((r) => r.id === props.room)[0];
         if (r) {
-            if (r.mode && r.players) {
+            if (r.mode) {
                 props.setMode(r.mode);
-                props.setPlayers(r.players);
             }
         }
     }, [props]);
@@ -56,23 +50,6 @@ function StartPage(props) {
             In this game, you will create a chain of <br /> neighbouring
             countries.
             <form onSubmit={handleSubmit}>
-                <br />
-                Select the number of players:
-                <div>
-                    {[1, 2, 3, 4].map((x) => {
-                        return (
-                            <label key={"numPlayers" + x}>
-                                <input
-                                    type="radio"
-                                    value={x}
-                                    checked={props.players === x}
-                                    onChange={onChangePlayers}
-                                />
-                                {x}
-                            </label>
-                        );
-                    })}
-                </div>
                 <br />
                 Select the game mode:
                 <div>
@@ -123,7 +100,6 @@ function StartPage(props) {
                         onClick={(e) => {
                             e.preventDefault();
                             socket.emit("createroom", {
-                                players: props.players,
                                 mode: props.mode,
                             });
                         }}
@@ -148,8 +124,6 @@ function StartPage(props) {
 StartPage.propTypes = {
     setPage: PropTypes.func,
     setMsg: PropTypes.func,
-    players: PropTypes.number,
-    setPlayers: PropTypes.func,
     mode: PropTypes.string,
     setMode: PropTypes.func,
     rooms: PropTypes.array,

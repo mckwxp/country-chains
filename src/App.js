@@ -202,9 +202,6 @@ function App() {
         socket.on("updatePlayersInRoom", (msg) => {
             setPlayersInRoom(msg);
         });
-        socket.on("joinFailed", (msg) => {
-            console.log("Failed to join room");
-        });
         socket.on("begin", (msg) => {
             setCountries(msg);
         });

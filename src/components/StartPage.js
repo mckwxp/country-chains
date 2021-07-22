@@ -19,7 +19,7 @@ function StartPage(props) {
                 roomID: props.room,
                 username: props.username,
             });
-            props.setPage(props.pages.GAME);
+            props.setPage("GAME");
             props.setMsg("Let's begin!");
         }
     }
@@ -147,7 +147,6 @@ function StartPage(props) {
 
 StartPage.propTypes = {
     setPage: PropTypes.func,
-    pages: PropTypes.object,
     setMsg: PropTypes.func,
     players: PropTypes.number,
     setPlayers: PropTypes.func,

@@ -125,18 +125,16 @@ function App() {
         }
     }
 
-    const [page, setPage] = useState(0);
-    const pages = { START: 0, GAME: 1, END: 2 };
+    const [page, setPage] = useState("START");
 
     const [rooms, setRooms] = useState([]);
     const [room, setRoom] = useState(null);
 
     function Main() {
-        if (page === pages.START) {
+        if (page === "START") {
             return (
                 <StartPage
                     setPage={setPage}
-                    pages={pages}
                     setMsg={setMsg}
                     players={players}
                     setPlayers={setPlayers}
@@ -150,7 +148,7 @@ function App() {
                     setUsername={setUsername}
                 />
             );
-        } else if (page === pages.GAME) {
+        } else if (page === "GAME") {
             return (
                 <div id="main-container">
                     <div id="game">
@@ -159,7 +157,6 @@ function App() {
                             countries={countries}
                             setPage={setPage}
                             setMsg={setMsg}
-                            pages={pages}
                             room={room}
                             username={username}
                             playersInRoom={playersInRoom}
@@ -174,13 +171,12 @@ function App() {
                     />
                 </div>
             );
-        } else if (page === pages.END) {
+        } else if (page === "END") {
             return (
                 <div id="main-container">
                     <EndPage
                         setMsg={setMsg}
                         setPage={setPage}
-                        pages={pages}
                         setCountries={setCountries}
                         room={room}
                         setRoom={setRoom}
@@ -198,6 +194,7 @@ function App() {
 
     const score = [countries.length, [...new Set(countries)].length];
 
+    // add socket listeners
     useEffect(() => {
         socket.on("updateRooms", (msg) => {
             setRooms(msg);
@@ -212,11 +209,11 @@ function App() {
             setCountries(msg);
         });
         socket.on("end", () => {
-            setPage(pages.END);
+            setPage("END");
             setMsg("Your score is:");
         });
         socket.on("reply", (msg) => setCountries(msg));
-    });
+    }, []);
 
     return (
         <div id="App">

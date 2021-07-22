@@ -2,6 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Players(props) {
+    function isCurrentPlayer(i) {
+        return (
+            props.countries.length % props.playersInRoom.length === i &&
+            props.page === "GAME"
+        );
+    }
     return (
         <div id="playersInRoom">
             You are in Room {props.room}.
@@ -13,11 +19,7 @@ function Players(props) {
                     return (
                         <li
                             className={`player${i}${
-                                props.countries.length %
-                                    props.playersInRoom.length ===
-                                i
-                                    ? " currentPlayer"
-                                    : ""
+                                isCurrentPlayer(i) ? " currentPlayer" : ""
                             }`}
                         >
                             {p.username}
@@ -30,6 +32,7 @@ function Players(props) {
 }
 
 Players.propTypes = {
+    page: PropTypes.string,
     room: PropTypes.number,
     playersInRoom: PropTypes.array,
     countries: PropTypes.array,

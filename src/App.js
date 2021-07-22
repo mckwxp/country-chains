@@ -165,6 +165,7 @@ function App() {
                     </div>
                     <Map countries={countries} players={players} />
                     <Players
+                        page={page}
                         room={room}
                         playersInRoom={playersInRoom}
                         countries={countries}
@@ -183,6 +184,7 @@ function App() {
                     />
                     <Map countries={countries} players={players} />
                     <Players
+                        page={page}
                         room={room}
                         playersInRoom={playersInRoom}
                         countries={countries}

@@ -95,15 +95,15 @@ ul {
 @keyframes borderBlink {
     from,
     to {
-        border-color: transparent;
+        outline-color: transparent;
     }
     50% {
-        border-color: black;
+        outline-color: black;
     }
 }
 
 #playersInRoom ul li.currentPlayer {
-    border: 1px solid black;
+    outline: 1px solid black;
     animation: borderBlink 1s step-end infinite;
 }
 

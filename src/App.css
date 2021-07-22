@@ -47,6 +47,10 @@ header {
     font-size: 18px;
 }
 
+#roomList label {
+    display: block;
+}
+
 #game,
 #EndPage {
     flex: 0 0 25%;

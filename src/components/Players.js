@@ -12,6 +12,8 @@ function Players(props) {
         <div id="playersInRoom">
             You are in Room {props.room}.
             <br />
+            Mode: {props.mode}
+            <br />
             Online players: {props.playersInRoom.length}
             <br />
             <ul>
@@ -36,6 +38,7 @@ Players.propTypes = {
     room: PropTypes.number,
     playersInRoom: PropTypes.array,
     countries: PropTypes.array,
+    mode: PropTypes.string,
 };
 
 export default Players;

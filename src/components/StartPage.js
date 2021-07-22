@@ -53,19 +53,16 @@ function StartPage(props) {
                 <br />
                 Select the game mode:
                 <div>
-                    {[
-                        { mode: "land", label: "Land" },
-                        { mode: "maritime", label: "Land and maritime" },
-                    ].map((x) => {
+                    {["Land", "Land and maritime"].map((x) => {
                         return (
                             <label key={"mode" + x}>
                                 <input
                                     type="radio"
-                                    value={x.mode}
-                                    checked={props.mode === x.mode}
+                                    value={x}
+                                    checked={props.mode === x}
                                     onChange={onChangeMode}
                                 />
-                                {x.label}
+                                {x}
                             </label>
                         );
                     })}
@@ -73,21 +70,27 @@ function StartPage(props) {
                 <br />
                 <div>
                     Select a room:
-                    <div>
+                    <div id="roomList">
                         {props.rooms.length > 0 ? (
-                            props.rooms.map((r) => {
-                                return (
-                                    <label key={"room" + r.id}>
-                                        <input
-                                            type="radio"
-                                            value={r.id}
-                                            checked={props.room === r.id}
-                                            onChange={onChangeRoom}
-                                        />
-                                        {"Room " + r.id}
-                                    </label>
-                                );
-                            })
+                            props.rooms.map((r) => (
+                                <label key={"room" + r.id}>
+                                    <input
+                                        type="radio"
+                                        value={r.id}
+                                        checked={props.room === r.id}
+                                        onChange={onChangeRoom}
+                                    />
+                                    {`Room ${r.id} (${
+                                        r.mode ? "Mode: " + r.mode + ";  " : ""
+                                    }Online players: ${
+                                        r.playersInRoom.length === 0
+                                            ? "none"
+                                            : r.playersInRoom
+                                                  .map((p) => p.username)
+                                                  .join(", ")
+                                    })`}
+                                </label>
+                            ))
                         ) : (
                             <div>There are no rooms available</div>
                         )}

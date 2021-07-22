@@ -10,13 +10,15 @@ import Map from "./components/Map.js";
 import { socket } from "./components/socket.js";
 
 function App() {
-    const [mode, setMode] = useState("land");
+    const [mode, setMode] = useState("Land");
 
     // Data for country neighbours
     const myjson =
-        mode === "land"
+        mode === "Land"
             ? require("./countries_land.json")
-            : require("./countries_maritime.json");
+            : mode === "Land and maritime"
+            ? require("./countries_maritime.json")
+            : alert(`No such mode ${mode}`);
 
     // Checks if the second country is a neighbour of the first country
     function checkNeighbours(first, second) {
@@ -167,6 +169,7 @@ function App() {
                         room={room}
                         playersInRoom={playersInRoom}
                         countries={countries}
+                        mode={mode}
                     />
                 </div>
             );
@@ -186,6 +189,7 @@ function App() {
                         room={room}
                         playersInRoom={playersInRoom}
                         countries={countries}
+                        mode={mode}
                     />
                 </div>
             );

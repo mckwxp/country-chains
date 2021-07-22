@@ -34,11 +34,17 @@ function Game(props) {
     }
 
     function handleClick() {
-        props.setPage("END");
-        props.setMsg("Your score is:");
-        socket.emit("end", {
-            roomID: props.room,
-        });
+        if (
+            window.confirm(
+                "Are you sure you want to finish? The room will be closed."
+            )
+        ) {
+            props.setPage("END");
+            props.setMsg("Your score is:");
+            socket.emit("end", {
+                roomID: props.room,
+            });
+        }
     }
 
     const countries = props.countries

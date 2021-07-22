@@ -161,9 +161,12 @@ function App() {
                             username={username}
                             playersInRoom={playersInRoom}
                         />
-                        <Result countries={countries} players={players} />
+                        <Result
+                            countries={countries}
+                            playersInRoom={playersInRoom}
+                        />
                     </div>
-                    <Map countries={countries} players={players} />
+                    <Map countries={countries} playersInRoom={playersInRoom} />
                     <Players
                         page={page}
                         room={room}
@@ -182,7 +185,7 @@ function App() {
                         room={room}
                         setRoom={setRoom}
                     />
-                    <Map countries={countries} players={players} />
+                    <Map countries={countries} playersInRoom={playersInRoom} />
                     <Players
                         page={page}
                         room={room}

@@ -9,7 +9,7 @@ function Result(props) {
             return (
                 <li
                     key={"country" + i}
-                    className={"player" + (i % props.players)}
+                    className={"player" + (i % props.playersInRoom.length)}
                 >
                     {c}
                 </li>
@@ -27,7 +27,7 @@ function Result(props) {
 
 Result.propTypes = {
     countries: PropTypes.array,
-    players: PropTypes.number,
+    playersInRoom: PropTypes.array,
 };
 
 export default Result;

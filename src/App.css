@@ -147,7 +147,7 @@ footer span {
     }
 
     /* remove new line for mobile layout */
-    #playersInRoom br:first-of-type {
+    #playersInRoom br:not(:last-child) {
         content: " ";
     }
 

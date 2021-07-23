@@ -23,6 +23,13 @@ function StartPage(props) {
         }
     }
 
+    function createRoom(e) {
+        e.preventDefault();
+        socket.emit("createroom", {
+            mode: props.mode,
+        });
+    }
+
     function onChangeMode(e) {
         props.setMode(e.target.value);
     }
@@ -53,19 +60,17 @@ function StartPage(props) {
                 <br />
                 Select the game mode:
                 <div>
-                    {["Land", "Land and maritime"].map((x) => {
-                        return (
-                            <label key={"mode" + x}>
-                                <input
-                                    type="radio"
-                                    value={x}
-                                    checked={props.mode === x}
-                                    onChange={onChangeMode}
-                                />
-                                {x}
-                            </label>
-                        );
-                    })}
+                    {["Land", "Land and maritime"].map((x) => (
+                        <label key={"mode" + x}>
+                            <input
+                                type="radio"
+                                value={x}
+                                checked={props.mode === x}
+                                onChange={onChangeMode}
+                            />
+                            {x}
+                        </label>
+                    ))}
                 </div>
                 <br />
                 <div>
@@ -73,23 +78,40 @@ function StartPage(props) {
                     <div id="roomList">
                         {props.rooms.length > 0 ? (
                             props.rooms.map((r) => (
-                                <label key={"room" + r.id}>
-                                    <input
-                                        type="radio"
-                                        value={r.id}
-                                        checked={props.room === r.id}
-                                        onChange={onChangeRoom}
-                                    />
-                                    {`Room ${r.id} (${
-                                        r.mode ? "Mode: " + r.mode + ";  " : ""
-                                    }Online players: ${
-                                        r.playersInRoom.length === 0
-                                            ? "none"
-                                            : r.playersInRoom
-                                                  .map((p) => p.username)
-                                                  .join(", ")
-                                    })`}
-                                </label>
+                                <div>
+                                    <label key={"room" + r.id}>
+                                        <input
+                                            type="radio"
+                                            value={r.id}
+                                            checked={props.room === r.id}
+                                            onChange={onChangeRoom}
+                                        />
+                                        {`Room ${r.id} (${
+                                            r.mode
+                                                ? "Mode: " + r.mode + ";  "
+                                                : ""
+                                        }Online players: ${
+                                            r.playersInRoom.length === 0
+                                                ? "none"
+                                                : r.playersInRoom
+                                                      .map((p) => p.username)
+                                                      .join(", ")
+                                        })`}
+                                    </label>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            socket.emit("spectate", {
+                                                roomID: r.id,
+                                            });
+                                            props.setPage("GAME");
+                                            props.setSpectate(true);
+                                            props.setRoom(r.id);
+                                        }}
+                                    >
+                                        Spectate
+                                    </button>
+                                </div>
                             ))
                         ) : (
                             <div>There are no rooms available</div>
@@ -98,15 +120,7 @@ function StartPage(props) {
                 </div>
                 <br />
                 <div>
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            socket.emit("createroom", {
-                                mode: props.mode,
-                            });
-                        }}
-                    >
+                    <button type="button" onClick={createRoom}>
                         Create a new room
                     </button>
                 </div>
@@ -134,6 +148,7 @@ StartPage.propTypes = {
     setRoom: PropTypes.func,
     username: PropTypes.string,
     setUserName: PropTypes.func,
+    setSpectate: PropTypes.func,
 };
 
 export default StartPage;

@@ -7,7 +7,10 @@ function Game(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (
+        if (props.spectate) {
+            alert("You cannot play the game as a spectator");
+            return;
+        } else if (
             props.playersInRoom.findIndex(
                 (x) => x.username === props.username
             ) !==
@@ -34,6 +37,10 @@ function Game(props) {
     }
 
     function handleClick() {
+        if (props.spectate) {
+            alert("You cannot play the game as a spectator");
+            return;
+        }
         if (
             window.confirm(
                 "Are you sure you want to finish? The room will be closed."
@@ -48,16 +55,14 @@ function Game(props) {
     }
 
     const countries = props.countries
-        .map((c, i) => {
-            return (
-                <li
-                    key={"country" + i}
-                    className={"player" + (i % props.playersInRoom.length)}
-                >
-                    {c}
-                </li>
-            );
-        })
+        .map((c, i) => (
+            <li
+                key={"country" + i}
+                className={"player" + (i % props.playersInRoom.length)}
+            >
+                {c}
+            </li>
+        ))
         .slice(0)
         .reverse();
 
@@ -95,6 +100,7 @@ Game.propTypes = {
     room: PropTypes.number,
     username: PropTypes.string,
     playersInRoom: PropTypes.array,
+    spectate: PropTypes.bool,
 };
 
 export default Game;

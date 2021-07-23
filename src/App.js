@@ -128,6 +128,8 @@ function App() {
     const [rooms, setRooms] = useState([]);
     const [room, setRoom] = useState(null);
 
+    const [spectate, setSpectate] = useState(false);
+
     function Main() {
         if (page === "START") {
             return (
@@ -142,6 +144,7 @@ function App() {
                     setRoom={setRoom}
                     username={username}
                     setUsername={setUsername}
+                    setSpectate={setSpectate}
                 />
             );
         } else if (page === "GAME") {
@@ -155,6 +158,7 @@ function App() {
                         room={room}
                         username={username}
                         playersInRoom={playersInRoom}
+                        spectate={spectate}
                     />
                     <Map countries={countries} playersInRoom={playersInRoom} />
                     <Players

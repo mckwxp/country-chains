@@ -17,17 +17,16 @@ function Players(props) {
             Online players: {props.playersInRoom.length}
             <br />
             <ul>
-                {props.playersInRoom.map((p, i) => {
-                    return (
-                        <li
-                            className={`player${i}${
-                                isCurrentPlayer(i) ? " currentPlayer" : ""
-                            }`}
-                        >
-                            {p.username}
-                        </li>
-                    );
-                })}
+                {props.playersInRoom.map((p, i) => (
+                    <li
+                        key={`player${i}`}
+                        className={`player${i}${
+                            isCurrentPlayer(i) ? " currentPlayer" : ""
+                        }`}
+                    >
+                        {p.username}
+                    </li>
+                ))}
             </ul>
         </div>
     );

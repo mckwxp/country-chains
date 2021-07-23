@@ -29,6 +29,13 @@ io.on("connection", (socket) => {
         console.log("Room created");
     });
 
+    socket.on("spectate", (msg) => {
+        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        socket.emit("begin", r.countries);
+        socket.join(r.id);
+        io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom);
+    });
+
     socket.on("configureRoom", (msg) => {
         let r = rooms.filter((r) => r.id === msg.roomID)[0];
         console.log("Room configured");

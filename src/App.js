@@ -129,6 +129,7 @@ function App() {
     const [room, setRoom] = useState(null);
 
     const [spectate, setSpectate] = useState(false);
+    const [connected, setConnected] = useState(true);
 
     function Main() {
         if (page === "START") {
@@ -211,6 +212,8 @@ function App() {
             setMsg("Your score is:");
         });
         socket.on("reply", (msg) => setCountries(msg));
+        socket.on("connect", () => setConnected(true));
+        socket.on("disconnect", () => setConnected(false));
     }, []);
 
     return (
@@ -226,6 +229,11 @@ function App() {
                 >
                     Source code on GitHub
                 </a>
+                <span>
+                    {connected
+                        ? "Connected to server"
+                        : "Disconnected from server"}
+                </span>
             </footer>
         </div>
     );

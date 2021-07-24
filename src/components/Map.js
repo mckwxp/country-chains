@@ -33,7 +33,7 @@ function Map(props) {
                 <CircleMarker
                     center={[country.latitude, country.longitude]}
                     pathOptions={{
-                        color: colors[i % props.players],
+                        color: colors[i % props.playersInRoom.length],
                         fillOpacity: 1,
                     }}
                     radius={5}
@@ -50,7 +50,6 @@ function Map(props) {
         let pos = props.countries
             .map((x, i) => {
                 let country = findLatLong(x);
-
                 return country ? [country.latitude, country.longitude] : null;
             })
             .filter((c) => c !== null);
@@ -109,7 +108,7 @@ function Map(props) {
 
 Map.propTypes = {
     countries: PropTypes.array,
-    players: PropTypes.number,
+    playersInRoom: PropTypes.array,
 };
 
 export default Map;

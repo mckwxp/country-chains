@@ -49,7 +49,7 @@ header {
 
 #game,
 #EndPage {
-    flex: 0 0 30%;
+    flex: 0 0 25%;
     min-width: 200px;
     /* add scrollbar within container if overflows
        auto works for Firefox and overlay works for Safari/Chrome */
@@ -57,41 +57,71 @@ header {
     overflow-y: overlay;
 }
 
-#Result ul li.player0::marker {
+#playersInRoom {
+    min-width: 150px;
+}
+
+ul li.player0::marker {
     color: green;
 }
 
-#Result ul li.player1::marker {
+ul li.player1::marker {
     color: red;
 }
 
-#Result ul li.player2::marker {
+ul li.player2::marker {
     color: blue;
 }
 
-#Result ul li.player3::marker {
+ul li.player3::marker {
     color: orange;
 }
 
 #Map {
-    flex: 0 1 70%;
+    flex: 0 1 60%;
 }
 
-#Result ul {
+ul {
     display: inline-block;
     font-size: 18px;
+    padding: 0;
+}
+
+#playersInRoom {
+    flex: 0 1 15%;
+    overflow: auto;
+}
+
+@keyframes borderBlink {
+    from,
+    to {
+        outline-color: transparent;
+    }
+    50% {
+        outline-color: black;
+    }
+}
+
+#playersInRoom ul li.currentPlayer {
+    outline: 1px solid black;
+    animation: borderBlink 1s step-end infinite;
 }
 
 footer {
     background-color: #282c34;
+    color: white;
     padding: 5px 10px;
-    text-align: left;
     flex: 0 0 auto;
 }
 
 footer a {
     color: white;
     font-size: 16px;
+    float: left;
+}
+
+footer span {
+    float: right;
 }
 
 @media (max-width: 600px) {
@@ -105,10 +135,36 @@ footer a {
 
     #game,
     #EndPage {
-        flex: 0 0 40%;
+        flex: 0 0 30%;
     }
 
     #Map {
         flex: 0 0 60%;
+    }
+
+    #playersInRoom {
+        flex: 0 0 10%;
+    }
+
+    /* remove new line for mobile layout */
+    #playersInRoom br:not(:last-child) {
+        content: " ";
+    }
+
+    #playersInRoom br:after {
+        content: " ";
+    }
+
+    #playersInRoom ul {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #playersInRoom ul li {
+        /* make a horizontal list with coloured markers */
+        float: left;
+        margin: 0 15px;
     }
 }

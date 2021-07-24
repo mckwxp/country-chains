@@ -2,9 +2,9 @@
 
 Chain neighbouring countries around the world!
 
-Play the game at https://mckwxp.github.io/country-chains
+Play the game at https://country-chains.herokuapp.com/
 
-This app is written in JavaScript using React and Leaflet.
+This app is written in JavaScript, using React/Leaflet for the frontend, Express/Node for the backend, and Socket.IO for client-server communication.
 
 ## Credits
 

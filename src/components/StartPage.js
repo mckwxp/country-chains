@@ -1,20 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { socket } from "./socket.js";
 
 function StartPage(props) {
     function handleSubmit(e) {
         e.preventDefault();
-        props.setPage(props.pages.GAME);
-        props.setMsg("Let's begin!");
+
+        if (!props.room) {
+            alert(
+                "Please choose a room (or create one and join if there are no rooms)"
+            );
+        } else if (!props.username.trim()) {
+            alert("Please enter your player name");
+        } else {
+            socket.emit("configureRoom", {
+                mode: props.mode,
+                roomID: props.room,
+                username: props.username,
+            });
+            props.setPage("GAME");
+            props.setMsg("Let's begin!");
+        }
     }
 
-    function onChangePlayers(e) {
-        props.setPlayers(parseInt(e.target.value));
+    function createRoom(e) {
+        e.preventDefault();
+        socket.emit("createroom", {
+            mode: props.mode,
+        });
     }
 
     function onChangeMode(e) {
         props.setMode(e.target.value);
     }
+
+    function onChangeRoom(e) {
+        props.setRoom(parseInt(e.target.value));
+    }
+
+    function onchangeUsername(e) {
+        props.setUsername(e.target.value);
+    }
+
+    useEffect(() => {
+        let r = props.rooms.filter((r) => r.id === props.room)[0];
+        if (r) {
+            if (r.mode) {
+                props.setMode(r.mode);
+            }
+        }
+    }, [props]);
 
     return (
         <div id="StartPage">
@@ -23,74 +58,80 @@ function StartPage(props) {
             countries.
             <form onSubmit={handleSubmit}>
                 <br />
-                Select the number of players:
-                <div>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers1"
-                            value={1}
-                            checked={props.players === 1}
-                            onChange={onChangePlayers}
-                        />
-                        1
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers2"
-                            value={2}
-                            checked={props.players === 2}
-                            onChange={onChangePlayers}
-                        />
-                        2
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers3"
-                            value={3}
-                            checked={props.players === 3}
-                            onChange={onChangePlayers}
-                        />
-                        3
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="numPlayers4"
-                            value={4}
-                            checked={props.players === 4}
-                            onChange={onChangePlayers}
-                        />
-                        4
-                    </label>
-                </div>
-                <br />
                 Select the game mode:
                 <div>
-                    <label>
-                        <input
-                            type="radio"
-                            id="mode1"
-                            value="land"
-                            checked={props.mode === "land"}
-                            onChange={onChangeMode}
-                        />
-                        Land
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="mode2"
-                            value="maritime"
-                            checked={props.mode === "maritime"}
-                            onChange={onChangeMode}
-                        />
-                        Land and Maritime
-                    </label>
+                    {["Land", "Land and maritime"].map((x) => (
+                        <label key={"mode" + x}>
+                            <input
+                                type="radio"
+                                value={x}
+                                checked={props.mode === x}
+                                onChange={onChangeMode}
+                            />
+                            {x}
+                        </label>
+                    ))}
                 </div>
                 <br />
+                <div>
+                    Select a room:
+                    <div id="roomList">
+                        {props.rooms.length > 0 ? (
+                            props.rooms.map((r) => (
+                                <div>
+                                    <label key={"room" + r.id}>
+                                        <input
+                                            type="radio"
+                                            value={r.id}
+                                            checked={props.room === r.id}
+                                            onChange={onChangeRoom}
+                                        />
+                                        {`Room ${r.id} (${
+                                            r.mode
+                                                ? "Mode: " + r.mode + ";  "
+                                                : ""
+                                        }Online players: ${
+                                            r.playersInRoom.length === 0
+                                                ? "none"
+                                                : r.playersInRoom
+                                                      .map((p) => p.username)
+                                                      .join(", ")
+                                        })`}
+                                    </label>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            socket.emit("spectate", {
+                                                roomID: r.id,
+                                            });
+                                            props.setPage("GAME");
+                                            props.setSpectate(true);
+                                            props.setRoom(r.id);
+                                        }}
+                                    >
+                                        Spectate
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <div>There are no rooms available</div>
+                        )}
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <button type="button" onClick={createRoom}>
+                        Create a new room
+                    </button>
+                </div>
+                <br />
+                Enter your player name:
+                <br />
+                <input
+                    type="text"
+                    value={props.username}
+                    onChange={onchangeUsername}
+                />
                 <button type="submit">Play now!</button>
             </form>
         </div>
@@ -99,12 +140,15 @@ function StartPage(props) {
 
 StartPage.propTypes = {
     setPage: PropTypes.func,
-    pages: PropTypes.object,
     setMsg: PropTypes.func,
-    players: PropTypes.number,
-    setPlayers: PropTypes.func,
     mode: PropTypes.string,
     setMode: PropTypes.func,
+    rooms: PropTypes.array,
+    room: PropTypes.number,
+    setRoom: PropTypes.func,
+    username: PropTypes.string,
+    setUserName: PropTypes.func,
+    setSpectate: PropTypes.func,
 };
 
 export default StartPage;

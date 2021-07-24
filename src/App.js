@@ -131,6 +131,21 @@ function App() {
     const [spectate, setSpectate] = useState(false);
     const [connected, setConnected] = useState(true);
 
+    function MapAndPlayers() {
+        return (
+            <>
+                <Map countries={countries} playersInRoom={playersInRoom} />
+                <Players
+                    page={page}
+                    room={room}
+                    playersInRoom={playersInRoom}
+                    countries={countries}
+                    mode={mode}
+                />
+            </>
+        );
+    }
+
     function Main() {
         if (page === "START") {
             return (
@@ -161,14 +176,7 @@ function App() {
                         playersInRoom={playersInRoom}
                         spectate={spectate}
                     />
-                    <Map countries={countries} playersInRoom={playersInRoom} />
-                    <Players
-                        page={page}
-                        room={room}
-                        playersInRoom={playersInRoom}
-                        countries={countries}
-                        mode={mode}
-                    />
+                    {MapAndPlayers() /* avoid map re-render */}
                 </div>
             );
         } else if (page === "END") {
@@ -181,14 +189,7 @@ function App() {
                         room={room}
                         setRoom={setRoom}
                     />
-                    <Map countries={countries} playersInRoom={playersInRoom} />
-                    <Players
-                        page={page}
-                        room={room}
-                        playersInRoom={playersInRoom}
-                        countries={countries}
-                        mode={mode}
-                    />
+                    {MapAndPlayers() /* avoid map re-render */}
                 </div>
             );
         }

@@ -25,9 +25,15 @@ function StartPage(props) {
 
     function createRoom(e) {
         e.preventDefault();
-        socket.emit("createRoom", {
-            mode: props.mode,
-        });
+        socket.emit("createRoom", { mode: props.mode });
+    }
+
+    function spectateRoom(r) {
+        socket.emit("spectate", { roomID: r.id });
+        props.setPage("GAME");
+        props.setSpectate(true);
+        props.setRoom(r.id);
+        props.setMode(r.mode);
     }
 
     function onChangeMode(e) {
@@ -42,6 +48,31 @@ function StartPage(props) {
         props.setUsername(e.target.value);
     }
 
+    function Room(r) {
+        return (
+            <>
+                <label key={"room" + r.id}>
+                    <input
+                        type="radio"
+                        value={r.id}
+                        checked={props.room === r.id}
+                        onChange={onChangeRoom}
+                    />
+                    {`Room ${r.id} (${
+                        r.mode ? "Mode: " + r.mode + ";  " : ""
+                    }Online players: ${
+                        r.playersInRoom.length === 0
+                            ? "none"
+                            : r.playersInRoom.map((p) => p.username).join(", ")
+                    })`}
+                </label>
+                <button type="button" onClick={() => spectateRoom(r)}>
+                    Spectate
+                </button>
+            </>
+        );
+    }
+
     // Set room mode when entering an existing room
     useEffect(() => {
         const r = props.rooms.filter((r) => r.id === props.room)[0];
@@ -54,12 +85,10 @@ function StartPage(props) {
 
     return (
         <div id="StartPage">
-            <br />
-            In this game, you will create a chain of <br /> neighbouring
+            <br /> In this game, you will create a chain of <br /> neighbouring
             countries.
             <form onSubmit={handleSubmit}>
-                <br />
-                Select the game mode:
+                <br /> Select the game mode:
                 <div>
                     {["Land", "Land and maritime"].map((x) => (
                         <label key={"mode" + x}>
@@ -77,47 +106,11 @@ function StartPage(props) {
                 <div>
                     Select a room:
                     <div id="roomList">
-                        {props.rooms.length > 0 ? (
-                            props.rooms.map((r) => (
-                                <div>
-                                    <label key={"room" + r.id}>
-                                        <input
-                                            type="radio"
-                                            value={r.id}
-                                            checked={props.room === r.id}
-                                            onChange={onChangeRoom}
-                                        />
-                                        {`Room ${r.id} (${
-                                            r.mode
-                                                ? "Mode: " + r.mode + ";  "
-                                                : ""
-                                        }Online players: ${
-                                            r.playersInRoom.length === 0
-                                                ? "none"
-                                                : r.playersInRoom
-                                                      .map((p) => p.username)
-                                                      .join(", ")
-                                        })`}
-                                    </label>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            socket.emit("spectate", {
-                                                roomID: r.id,
-                                            });
-                                            props.setPage("GAME");
-                                            props.setSpectate(true);
-                                            props.setRoom(r.id);
-                                            props.setMode(r.mode);
-                                        }}
-                                    >
-                                        Spectate
-                                    </button>
-                                </div>
-                            ))
-                        ) : (
-                            <div>There are no rooms available</div>
-                        )}
+                        <div>
+                            {props.rooms.length > 0
+                                ? props.rooms.map(Room)
+                                : "There are no rooms available"}
+                        </div>
                     </div>
                 </div>
                 <br />

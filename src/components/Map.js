@@ -48,7 +48,7 @@ function Map(props) {
     function Lines() {
         // add lines to connect the circle markers
         const pos = props.countries
-            .map((x, i) => {
+            .map((x) => {
                 const country = findLatLong(x);
                 return country ? [country.latitude, country.longitude] : null;
             })

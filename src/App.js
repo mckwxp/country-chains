@@ -188,6 +188,8 @@ function App() {
                         setCountries={setCountries}
                         room={room}
                         setRoom={setRoom}
+                        countries={countries}
+                        playersInRoom={playersInRoom}
                     />
                     {MapAndPlayers() /* avoid map re-render */}
                 </div>

@@ -90,20 +90,14 @@ function App() {
 
     // add socket listeners
     useEffect(() => {
-        socket.on("updateRooms", (msg) => {
-            setRooms(msg);
-        });
-        socket.on("updatePlayersInRoom", (msg) => {
-            setPlayersInRoom(msg);
-        });
-        socket.on("begin", (msg) => {
-            setCountries(msg);
-        });
+        socket.on("updateRooms", setRooms);
+        socket.on("updatePlayersInRoom", setPlayersInRoom);
+        socket.on("begin", setCountries);
         socket.on("end", () => {
             setPage("END");
             setMsg("Your score is:");
         });
-        socket.on("reply", (msg) => setCountries(msg));
+        socket.on("reply", setCountries);
         socket.on("connect", () => setConnected(true));
         socket.on("disconnect", () => setConnected(false));
     }, []);

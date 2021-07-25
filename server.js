@@ -88,10 +88,12 @@ function addCountry(countryName, room) {
 
 let rooms = [];
 
+// a bunch of event listeners
 io.on("connection", (socket) => {
     console.log("connected");
-    socket.emit("updateRooms", rooms);
+    socket.emit("updateRooms", rooms); // send rooms data to client
 
+    // create new room
     socket.on("createRoom", () => {
         let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
         rooms.push({
@@ -100,41 +102,45 @@ io.on("connection", (socket) => {
             countries: [],
             playersInRoom: [],
         });
-        io.emit("updateRooms", rooms);
+        io.emit("updateRooms", rooms); // broadcast updated rooms to all clients
         console.log("Room created");
     });
 
+    // add spectator
     socket.on("spectate", (msg) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0];
-        socket.emit("begin", r.countries);
-        socket.join(r.id);
-        io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom);
+        let r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        socket.emit("begin", r.countries); // send country data in room to client
+        socket.join(r.id); // add client to room
+        io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom); // broadcast player list to room
     });
 
+    // configure room and prepare to start
     socket.on("configureRoom", (msg) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        let r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
         console.log("Room configured");
         r.mode = msg.mode;
         r.playersInRoom.push({
             id: socket.id,
             username: msg.username ?? "guest",
         });
-        io.emit("updateRooms", rooms);
-        socket.emit("begin", r.countries);
-        socket.join(r.id);
-        io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom);
+        io.emit("updateRooms", rooms); // broadcast updated rooms to all clients
+        socket.emit("begin", r.countries); // send country data in room to client
+        socket.join(r.id); // add client to room
+        io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom); // broadcast player list to room
     });
 
+    // Attempt to add a new country
     socket.on("addCountry", (msg, callback) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0];
+        let r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
         let response = addCountry(msg.country, r);
-        callback(response);
+        callback(response); // client callback function on response
         if (["validNeighbour", "validFirstCountry"].includes(response.status)) {
             r.countries.push(response.country);
-            io.to(r.id).emit("reply", r.countries);
+            io.to(r.id).emit("reply", r.countries); // send updated country data to client
         }
     });
 
+    // End the game
     socket.on("end", (msg) => {
         io.to(msg.roomID).emit("end");
         socket.leave(msg.roomID);

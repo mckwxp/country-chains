@@ -15,7 +15,7 @@ function Map(props) {
 
     function findLatLong(x) {
         // get lat/long data from country name
-        let countryArr = latlongData.filter(
+        const countryArr = latlongData.filter(
             (c) => c.country.toLowerCase() === x.toLowerCase()
         );
 
@@ -23,11 +23,11 @@ function Map(props) {
     }
 
     function LocationMarker() {
-        let colors = ["green", "red", "blue", "orange"];
+        const colors = ["green", "red", "blue", "orange"];
 
         // add circle markers for each country
         return props.countries.map((x, i) => {
-            let country = findLatLong(x);
+            const country = findLatLong(x);
 
             return country ? (
                 <CircleMarker
@@ -47,9 +47,9 @@ function Map(props) {
 
     function Lines() {
         // add lines to connect the circle markers
-        let pos = props.countries
+        const pos = props.countries
             .map((x, i) => {
-                let country = findLatLong(x);
+                const country = findLatLong(x);
                 return country ? [country.latitude, country.longitude] : null;
             })
             .filter((c) => c !== null);
@@ -59,7 +59,7 @@ function Map(props) {
 
     function CurrentLocation() {
         if (props.countries.length > 0) {
-            let country = findLatLong(
+            const country = findLatLong(
                 props.countries[props.countries.length - 1]
             );
             if (country) {

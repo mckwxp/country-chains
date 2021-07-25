@@ -43,7 +43,7 @@ function StartPage(props) {
     }
 
     useEffect(() => {
-        let r = props.rooms.filter((r) => r.id === props.room)[0];
+        const r = props.rooms.filter((r) => r.id === props.room)[0];
         if (r) {
             if (r.mode) {
                 props.setMode(r.mode);

@@ -26,7 +26,7 @@ function addCountry(countryName, room) {
         );
 
         if (searchResults) {
-            let filteredNeighbours = searchResults.neighbours.filter(
+            const filteredNeighbours = searchResults.neighbours.filter(
                 (x) => x.toLowerCase() === second.toLowerCase()
             );
             if (filteredNeighbours.length !== 0) {
@@ -95,7 +95,8 @@ io.on("connection", (socket) => {
 
     // create new room
     socket.on("createRoom", () => {
-        let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
+        const maxID =
+            rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
         rooms.push({
             id: maxID + 1,
             mode: null,
@@ -108,7 +109,7 @@ io.on("connection", (socket) => {
 
     // add spectator
     socket.on("spectate", (msg) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        const r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
         socket.emit("begin", r.countries); // send country data in room to client
         socket.join(r.id); // add client to room
         io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom); // broadcast player list to room
@@ -116,7 +117,7 @@ io.on("connection", (socket) => {
 
     // configure room and prepare to start
     socket.on("configureRoom", (msg) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        const r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
         console.log("Room configured");
         r.mode = msg.mode;
         r.playersInRoom.push({
@@ -131,8 +132,8 @@ io.on("connection", (socket) => {
 
     // Attempt to add a new country
     socket.on("addCountry", (msg, callback) => {
-        let r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
-        let response = addCountry(msg.country, r);
+        const r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        const response = addCountry(msg.country, r);
         callback(response); // client callback function on response
         if (["validNeighbour", "validFirstCountry"].includes(response.status)) {
             r.countries.push(response.country);
@@ -153,7 +154,7 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         // find which room the user is in
         // (should be just one room, but keep as array just in case)
-        let inRoom = rooms.filter(
+        const inRoom = rooms.filter(
             (r) =>
                 r.playersInRoom.filter((p) => p.id === socket.id).length !== 0
         );

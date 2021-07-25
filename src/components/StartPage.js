@@ -29,11 +29,13 @@ function StartPage(props) {
     }
 
     function spectateRoom(r) {
-        socket.emit("spectate", { roomID: r.id });
-        props.setPage("GAME");
-        props.setSpectate(true);
-        props.setRoom(r.id);
-        props.setMode(r.mode);
+        return () => {
+            socket.emit("spectate", { roomID: r.id });
+            props.setPage("GAME");
+            props.setSpectate(true);
+            props.setRoom(r.id);
+            props.setMode(r.mode);
+        };
     }
 
     function onChangeMode(e) {
@@ -66,7 +68,7 @@ function StartPage(props) {
                             : r.playersInRoom.map((p) => p.username).join(", ")
                     })`}
                 </label>
-                <button type="button" onClick={() => spectateRoom(r)}>
+                <button type="button" onClick={spectateRoom(r)}>
                     Spectate
                 </button>
             </div>

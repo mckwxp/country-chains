@@ -50,7 +50,7 @@ function StartPage(props) {
 
     function Room(r) {
         return (
-            <>
+            <div>
                 <label key={"room" + r.id}>
                     <input
                         type="radio"
@@ -69,7 +69,7 @@ function StartPage(props) {
                 <button type="button" onClick={() => spectateRoom(r)}>
                     Spectate
                 </button>
-            </>
+            </div>
         );
     }
 

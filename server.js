@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
     console.log("connected");
     socket.emit("updateRooms", rooms);
 
-    socket.on("createroom", () => {
+    socket.on("createRoom", () => {
         let maxID = rooms.length > 0 ? Math.max(...rooms.map((x) => x.id)) : 0;
         rooms.push({
             id: maxID + 1,

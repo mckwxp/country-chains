@@ -25,7 +25,7 @@ function StartPage(props) {
 
     function createRoom(e) {
         e.preventDefault();
-        socket.emit("createroom", {
+        socket.emit("createRoom", {
             mode: props.mode,
         });
     }

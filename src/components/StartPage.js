@@ -42,6 +42,7 @@ function StartPage(props) {
         props.setUsername(e.target.value);
     }
 
+    // Set room mode when entering an existing room
     useEffect(() => {
         const r = props.rooms.filter((r) => r.id === props.room)[0];
         if (r) {
@@ -107,6 +108,7 @@ function StartPage(props) {
                                             props.setPage("GAME");
                                             props.setSpectate(true);
                                             props.setRoom(r.id);
+                                            props.setMode(r.mode);
                                         }}
                                     >
                                         Spectate

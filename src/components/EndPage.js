@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CountryList from "./CountryList.js";
 
 function EndPage(props) {
     function handleClick() {
@@ -9,18 +10,6 @@ function EndPage(props) {
         props.setRoom(null);
     }
 
-    const countries = props.countries
-        .map((c, i) => (
-            <li
-                key={"country" + i}
-                className={"player" + (i % props.playersInRoom.length)}
-            >
-                {c}
-            </li>
-        ))
-        .slice(0)
-        .reverse();
-
     return (
         <div id="EndPage">
             <div>
@@ -29,9 +18,10 @@ function EndPage(props) {
                     Play again!
                 </button>
             </div>
-            <div id="Result">
-                <ul>{countries}</ul>
-            </div>
+            <CountryList
+                countries={props.countries}
+                playersInRoom={props.playersInRoom}
+            />
         </div>
     );
 }

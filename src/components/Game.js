@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import CountryList from "./CountryList.js";
 import { socket } from "./socket.js";
 
 function Game(props) {
@@ -54,18 +55,6 @@ function Game(props) {
         }
     }
 
-    const countries = props.countries
-        .map((c, i) => (
-            <li
-                key={"country" + i}
-                className={"player" + (i % props.playersInRoom.length)}
-            >
-                {c}
-            </li>
-        ))
-        .slice(0)
-        .reverse();
-
     return (
         <div id="game">
             <div id="Form">
@@ -85,9 +74,10 @@ function Game(props) {
                     </button>
                 </div>
             </div>
-            <div id="Result">
-                <ul>{countries}</ul>
-            </div>
+            <CountryList
+                countries={props.countries}
+                playersInRoom={props.playersInRoom}
+            />
         </div>
     );
 }

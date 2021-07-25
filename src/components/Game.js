@@ -20,16 +20,42 @@ function Game(props) {
             alert("It's not your turn");
             return;
         }
+
         const countryName = name.trim();
         if (countryName !== "") {
-            let newCountry = props.addCountry(countryName);
-            if (newCountry) {
-                setName("");
-                socket.emit("message", {
+            socket.emit(
+                "addCountry",
+                {
                     roomID: props.room,
-                    country: newCountry,
-                });
-            }
+                    country: countryName,
+                },
+                (response) => {
+                    if (response.status === "invalidCountry") {
+                        props.setMsg(`This is not a valid country.`);
+                    } else if (response.status === "invalidFirstCountry") {
+                        props.setMsg(
+                            "This country does not have any neighbours. Please name another one."
+                        );
+                    } else if (response.status === "invalidNeighbour") {
+                        props.setMsg(
+                            `${response.country} is not a neighbour of ${
+                                props.countries[props.countries.length - 1]
+                            }.`
+                        );
+                    } else if (response.status === "validFirstCountry") {
+                        setName("");
+                        props.setCountries([response.country]);
+                        props.setMsg("Great start!");
+                    } else if (response.status === "validNeighbour") {
+                        setName("");
+                        props.setCountries([
+                            ...props.countries,
+                            response.country,
+                        ]);
+                        props.setMsg("Well done! Keep going!");
+                    }
+                }
+            );
         }
     }
 
@@ -83,8 +109,8 @@ function Game(props) {
 }
 
 Game.propTypes = {
-    addCountry: PropTypes.func,
     countries: PropTypes.array,
+    setCountries: PropTypes.func,
     setPage: PropTypes.func,
     setMsg: PropTypes.func,
     room: PropTypes.number,

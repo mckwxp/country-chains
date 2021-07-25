@@ -76,10 +76,10 @@ function Map(props) {
                     </LayersControl>
                 );
             } else {
-                return null;
+                return null; // needed to render a null element instead of nothing
             }
         } else {
-            return null;
+            return null; // needed to render a null element instead of nothing
         }
     }
 

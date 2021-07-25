@@ -88,6 +88,10 @@ function addCountry(countryName, room) {
 
 let rooms = [];
 
+function getCurrentRoom(msg) {
+    return rooms.filter((r) => r.id === msg.roomID)[0];
+}
+
 // a bunch of event listeners
 io.on("connection", (socket) => {
     console.log("connected");
@@ -109,7 +113,7 @@ io.on("connection", (socket) => {
 
     // add spectator
     socket.on("spectate", (msg) => {
-        const r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        const r = getCurrentRoom(msg);
         socket.emit("begin", r.countries); // send country data in room to client
         socket.join(r.id); // add client to room
         io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom); // broadcast player list to room
@@ -117,7 +121,7 @@ io.on("connection", (socket) => {
 
     // configure room and prepare to start
     socket.on("configureRoom", (msg) => {
-        const r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        const r = getCurrentRoom(msg);
         console.log("Room configured");
         r.mode = msg.mode;
         r.playersInRoom.push({
@@ -132,7 +136,7 @@ io.on("connection", (socket) => {
 
     // Attempt to add a new country
     socket.on("addCountry", (msg, callback) => {
-        const r = rooms.filter((r) => r.id === msg.roomID)[0]; // current room
+        const r = getCurrentRoom(msg);
         const response = addCountry(msg.country, r);
         callback(response); // client callback function on response
         if (["validNeighbour", "validFirstCountry"].includes(response.status)) {

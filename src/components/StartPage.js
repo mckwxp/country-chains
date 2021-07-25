@@ -73,6 +73,20 @@ function StartPage(props) {
         );
     }
 
+    function Mode(x) {
+        return (
+            <label key={"mode" + x}>
+                <input
+                    type="radio"
+                    value={x}
+                    checked={props.mode === x}
+                    onChange={onChangeMode}
+                />
+                {x}
+            </label>
+        );
+    }
+
     // Set room mode when entering an existing room
     useEffect(() => {
         const r = props.rooms.filter((r) => r.id === props.room)[0];
@@ -89,19 +103,7 @@ function StartPage(props) {
             countries.
             <form onSubmit={handleSubmit}>
                 <br /> Select the game mode:
-                <div>
-                    {["Land", "Land and maritime"].map((x) => (
-                        <label key={"mode" + x}>
-                            <input
-                                type="radio"
-                                value={x}
-                                checked={props.mode === x}
-                                onChange={onChangeMode}
-                            />
-                            {x}
-                        </label>
-                    ))}
-                </div>
+                <div>{["Land", "Land and maritime"].map(Mode)}</div>
                 <br />
                 <div>
                     Select a room:

@@ -28,6 +28,11 @@ function StartPage(props) {
         socket.emit("createRoom", { mode: props.mode });
     }
 
+    function viewHighscore(e) {
+        e.preventDefault();
+        socket.emit("getHighscore");
+    }
+
     function spectateRoom(r) {
         return () => {
             socket.emit("spectate", { roomID: r.id });
@@ -123,15 +128,24 @@ function StartPage(props) {
                         Create a new room
                     </button>
                 </div>
+                <div>
+                    <br />
+                    Enter your player name:
+                    <br />
+                    <input
+                        type="text"
+                        value={props.username}
+                        onChange={onchangeUsername}
+                    />
+                    <button type="submit">Play now!</button>
+                    <br />
+                </div>
                 <br />
-                Enter your player name:
-                <br />
-                <input
-                    type="text"
-                    value={props.username}
-                    onChange={onchangeUsername}
-                />
-                <button type="submit">Play now!</button>
+                <div>
+                    <button type="button" onClick={viewHighscore}>
+                        View highscore
+                    </button>
+                </div>
             </form>
         </div>
     );

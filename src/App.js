@@ -6,6 +6,7 @@ import Players from "./components/Players.js";
 import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
 import Map from "./components/Map.js";
+import Highscore from "./components/Highscore.js";
 import { socket } from "./components/socket.js";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
     const [rooms, setRooms] = useState([]); // room list state
     const [room, setRoom] = useState(null); // current room state
     const [spectate, setSpectate] = useState(false); // spectator state
-    const [connected, setConnected] = useState(true); // server connection state
+    const [connected, setConnected] = useState(false); // server connection state
+    const [highscore, setHighscore] = useState(null); // highscore state
 
     function MapAndPlayers() {
         return (
@@ -100,6 +102,7 @@ function App() {
         socket.on("reply", setCountries);
         socket.on("connect", () => setConnected(true));
         socket.on("disconnect", () => setConnected(false));
+        socket.on("highscore", setHighscore);
     }, []);
 
     return (
@@ -107,6 +110,7 @@ function App() {
             <header>🔗Country Chains🔗</header>
             <Info msg={msg} score={score} />
             {Main() /* reason: https://stackoverflow.com/a/65328486 */}
+            <Highscore highscore={highscore} />
             <footer>
                 <a
                     href="https://github.com/mckwxp/country-chains"

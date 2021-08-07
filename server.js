@@ -1,11 +1,29 @@
+// serve static webpage with Express
 const express = require("express");
 const path = require("path");
 const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 const port = process.env.PORT || 3001;
 
+// socket.io server setup
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
+
+// connect to mongoDB highscore database using mongoose
+const mongoose = require("mongoose");
+const dbUrl = process.env.MONGODB_URI;
+mongoose.connect(
+    dbUrl,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    (err) => {
+        err ? console.error(err) : console.log("Connected to db");
+    }
+);
+const Highscore = mongoose.model(
+    "Highscore",
+    { mode: String, countries: Array, playersInRoom: Array },
+    "highscore"
+);
 
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
@@ -94,7 +112,7 @@ function getCurrentRoom(msg) {
 
 // a bunch of event listeners
 io.on("connection", (socket) => {
-    console.log("connected");
+    console.log("Client connected");
     socket.emit("updateRooms", rooms); // send rooms data to client
 
     // create new room
@@ -108,7 +126,7 @@ io.on("connection", (socket) => {
             playersInRoom: [],
         });
         io.emit("updateRooms", rooms); // broadcast updated rooms to all clients
-        console.log("Room created");
+        console.log(`Room ${maxID + 1} created`);
     });
 
     // add spectator
@@ -122,7 +140,7 @@ io.on("connection", (socket) => {
     // configure room and prepare to start
     socket.on("configureRoom", (msg) => {
         const r = getCurrentRoom(msg);
-        console.log("Room configured");
+        console.log(`Room ${msg.roomID} configured`);
         r.mode = msg.mode;
         r.playersInRoom.push({
             id: socket.id,
@@ -147,8 +165,17 @@ io.on("connection", (socket) => {
 
     // End the game
     socket.on("end", (msg) => {
+        // register highscore in database
+        const { id, ...otherThings } = getCurrentRoom(msg);
+        const highscore = Highscore(otherThings);
+        highscore.save((err) => {
+            err ? console.error(err) : console.log("Inserted highscore to db");
+        });
+
+        // remove all sockets attached to the room
         io.to(msg.roomID).emit("end");
         socket.leave(msg.roomID);
+
         // remove the room
         rooms = rooms.filter((r) => r.id !== msg.roomID);
         console.log(`Room ${msg.roomID} removed`);
@@ -174,6 +201,17 @@ io.on("connection", (socket) => {
             io.to(r.id).emit("updatePlayersInRoom", r.playersInRoom)
         );
 
-        console.log("disconnected");
+        console.log("Client disconnected");
+    });
+
+    socket.on("getHighscore", () => {
+        Highscore.find({}, (err, msg) => {
+            if (err) {
+                console.log("Failed to retrieve highscore from db");
+                socket.emit("highscore", { status: "fail", highscore: null });
+            } else {
+                socket.emit("highscore", { status: "success", highscore: msg });
+            }
+        });
     });
 });

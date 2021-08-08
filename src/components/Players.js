@@ -21,11 +21,17 @@ function Players(props) {
         );
     }
 
+    const replayStyle = props.page === "REPLAY" ? "replay" : "";
+
     return (
         <div id="playersInRoom">
-            You are in Room {props.room}. <br />
+            <span className={replayStyle}>
+                You are in Room {props.room}. <br />
+            </span>
             Mode: {props.mode} <br />
-            Online players: {props.playersInRoom.length} <br />
+            <span className={replayStyle}>
+                Online players: {props.playersInRoom.length} <br />
+            </span>
             <ul>{props.playersInRoom.map(Player)}</ul>
         </div>
     );

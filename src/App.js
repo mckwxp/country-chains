@@ -54,7 +54,7 @@ function App() {
                     setSpectate={setSpectate}
                 />
             );
-        } else if (page === "GAME") {
+        } else if (page === "GAME" || page === "REPLAY") {
             return (
                 <div id="main-container">
                     <Game
@@ -66,6 +66,7 @@ function App() {
                         username={username}
                         playersInRoom={playersInRoom}
                         spectate={spectate}
+                        page={page}
                     />
                     {MapAndPlayers() /* avoid map re-render */}
                 </div>
@@ -85,6 +86,18 @@ function App() {
                     {MapAndPlayers() /* avoid map re-render */}
                 </div>
             );
+        } else if (page === "HIGHSCORE") {
+            return (
+                <Highscore
+                    highscore={highscore}
+                    countries={countries}
+                    playersInRoom={playersInRoom}
+                    setMode={setMode}
+                    setCountries={setCountries}
+                    setPlayersInRoom={setPlayersInRoom}
+                    setPage={setPage}
+                />
+            );
         }
     }
 
@@ -103,14 +116,26 @@ function App() {
         socket.on("connect", () => setConnected(true));
         socket.on("disconnect", () => setConnected(false));
         socket.on("highscore", setHighscore);
+        socket.on("highscoreFail", () => {
+            alert("Failed to get highscore data");
+        });
     }, []);
+
+    // Set highscore once data comes back from server
+    // useEffect(() => {
+    //     if (highscore) {
+    //         setMode(highscore.mode);
+    //         setCountries(highscore.countries);
+    //         setPlayersInRoom(highscore.playersInRoom);
+    //     }
+    // }, [highscore]);
 
     return (
         <div id="App">
             <header>🔗Country Chains🔗</header>
             <Info msg={msg} score={score} />
             {Main() /* reason: https://stackoverflow.com/a/65328486 */}
-            <Highscore highscore={highscore} />
+
             <footer>
                 <a
                     href="https://github.com/mckwxp/country-chains"

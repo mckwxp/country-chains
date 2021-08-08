@@ -31,6 +31,7 @@ function StartPage(props) {
     function viewHighscore(e) {
         e.preventDefault();
         socket.emit("getHighscore");
+        props.setPage("HIGHSCORE");
     }
 
     function spectateRoom(r) {

@@ -208,9 +208,9 @@ io.on("connection", (socket) => {
         Highscore.find({}, (err, msg) => {
             if (err) {
                 console.log("Failed to retrieve highscore from db");
-                socket.emit("highscore", { status: "fail", highscore: null });
+                socket.emit("highscoreFail");
             } else {
-                socket.emit("highscore", { status: "success", highscore: msg });
+                socket.emit("highscore", msg);
             }
         });
     });

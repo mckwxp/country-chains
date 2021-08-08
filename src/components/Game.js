@@ -81,9 +81,11 @@ function Game(props) {
         }
     }
 
+    const replayStyle = props.page === "REPLAY" ? "replay" : "";
+
     return (
         <div id="game">
-            <div id="Form">
+            <div id="Form" className={replayStyle}>
                 <form onSubmit={handleSubmit} autoComplete="off">
                     <p>Enter a country name:</p>
                     <input

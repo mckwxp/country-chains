@@ -21,7 +21,7 @@ mongoose.connect(
 );
 const Highscore = mongoose.model(
     "Highscore",
-    { mode: String, countries: Array, playersInRoom: Array },
+    { mode: String, countries: Array, playersInRoom: Array, score: Number },
     "highscore"
 );
 
@@ -167,10 +167,18 @@ io.on("connection", (socket) => {
     socket.on("end", (msg) => {
         // register highscore in database
         const { id, ...otherThings } = getCurrentRoom(msg);
-        const highscore = Highscore(otherThings);
-        highscore.save((err) => {
-            err ? console.error(err) : console.log("Inserted highscore to db");
-        });
+        const result = {
+            ...otherThings,
+            score: [...new Set(otherThings.countries)].length,
+        };
+        if (result.score > 1) {
+            const highscore = Highscore(result);
+            highscore.save((err) => {
+                err
+                    ? console.error(err)
+                    : console.log("Inserted highscore to db");
+            });
+        }
 
         // remove all sockets attached to the room
         io.to(msg.roomID).emit("end");

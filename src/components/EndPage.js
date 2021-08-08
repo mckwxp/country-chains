@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import CountryList from "./CountryList.js";
 
 function EndPage(props) {
-    function handleClick() {
+    function returnToHome() {
         props.setPage("START");
         props.setMsg("Welcome to the game!");
         props.setCountries([]);
@@ -14,8 +14,8 @@ function EndPage(props) {
         <div id="EndPage">
             <div>
                 <p>Thanks for playing!</p>
-                <button type="button" onClick={handleClick}>
-                    Play again!
+                <button type="button" onClick={returnToHome}>
+                    Back to homepage
                 </button>
             </div>
             <CountryList

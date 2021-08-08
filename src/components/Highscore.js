@@ -8,7 +8,13 @@ function Highscore(props) {
             props.setCountries(x.countries);
             props.setPlayersInRoom(x.playersInRoom);
             props.setPage("REPLAY");
+            props.setMsg("You are reviewing a game.");
         };
+    }
+
+    function returnToHome() {
+        props.setPage("START");
+        props.setMsg("Welcome to the game!");
     }
 
     function HighscoreItem(x, i) {
@@ -16,7 +22,7 @@ function Highscore(props) {
             <tr key={`highscore${i}`}>
                 <td>{x.mode}</td>
                 <td>{x.playersInRoom.map((p) => p.username).join(", ")}</td>
-                <td>{x.countries.length}</td>
+                <td>{x.score}</td>
                 <td>
                     <button
                         type="button"
@@ -46,8 +52,8 @@ function Highscore(props) {
             </table>
             <br />
             <br />
-            <button type="button" onClick={() => props.setPage("START")}>
-                Go back to the homepage{" "}
+            <button type="button" onClick={returnToHome}>
+                Back to homepage
             </button>
         </div>
     );
@@ -57,6 +63,11 @@ Highscore.propTypes = {
     highscore: PropTypes.array,
     countries: PropTypes.array,
     playersInRoom: PropTypes.array,
+    setMode: PropTypes.func,
+    setCountries: PropTypes.func,
+    setPlayersInRoom: PropTypes.func,
+    setPage: PropTypes.func,
+    setMsg: PropTypes.func,
 };
 
 export default Highscore;

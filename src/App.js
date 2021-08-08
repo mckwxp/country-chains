@@ -96,6 +96,7 @@ function App() {
                     setCountries={setCountries}
                     setPlayersInRoom={setPlayersInRoom}
                     setPage={setPage}
+                    setMsg={setMsg}
                 />
             );
         }

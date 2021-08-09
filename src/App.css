@@ -27,7 +27,8 @@ header {
     margin: 0 10px;
 }
 
-#StartPage {
+#StartPage,
+#Highscore {
     flex: 1 1 auto;
 }
 
@@ -81,10 +82,30 @@ ul li.player3::marker {
     flex: 0 1 60%;
 }
 
-ul {
+ul,
+table {
     display: inline-block;
     font-size: 18px;
     padding: 0;
+}
+
+th,
+td {
+    padding: 0px 10px;
+}
+
+.link-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.replay {
+    display: none;
 }
 
 #playersInRoom {

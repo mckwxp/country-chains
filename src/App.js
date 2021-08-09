@@ -6,6 +6,7 @@ import Players from "./components/Players.js";
 import StartPage from "./components/StartPage.js";
 import EndPage from "./components/EndPage.js";
 import Map from "./components/Map.js";
+import Highscore from "./components/Highscore.js";
 import { socket } from "./components/socket.js";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
     const [rooms, setRooms] = useState([]); // room list state
     const [room, setRoom] = useState(null); // current room state
     const [spectate, setSpectate] = useState(false); // spectator state
-    const [connected, setConnected] = useState(true); // server connection state
+    const [connected, setConnected] = useState(false); // server connection state
+    const [highscore, setHighscore] = useState(null); // highscore state
 
     function MapAndPlayers() {
         return (
@@ -52,7 +54,7 @@ function App() {
                     setSpectate={setSpectate}
                 />
             );
-        } else if (page === "GAME") {
+        } else if (page === "GAME" || page === "REPLAY") {
             return (
                 <div id="main-container">
                     <Game
@@ -64,6 +66,7 @@ function App() {
                         username={username}
                         playersInRoom={playersInRoom}
                         spectate={spectate}
+                        page={page}
                     />
                     {MapAndPlayers() /* avoid map re-render */}
                 </div>
@@ -83,6 +86,19 @@ function App() {
                     {MapAndPlayers() /* avoid map re-render */}
                 </div>
             );
+        } else if (page === "HIGHSCORE") {
+            return (
+                <Highscore
+                    highscore={highscore}
+                    countries={countries}
+                    playersInRoom={playersInRoom}
+                    setMode={setMode}
+                    setCountries={setCountries}
+                    setPlayersInRoom={setPlayersInRoom}
+                    setPage={setPage}
+                    setMsg={setMsg}
+                />
+            );
         }
     }
 
@@ -100,13 +116,27 @@ function App() {
         socket.on("reply", setCountries);
         socket.on("connect", () => setConnected(true));
         socket.on("disconnect", () => setConnected(false));
+        socket.on("highscore", setHighscore);
+        socket.on("highscoreFail", () => {
+            alert("Failed to get highscore data");
+        });
     }, []);
+
+    // Set highscore once data comes back from server
+    // useEffect(() => {
+    //     if (highscore) {
+    //         setMode(highscore.mode);
+    //         setCountries(highscore.countries);
+    //         setPlayersInRoom(highscore.playersInRoom);
+    //     }
+    // }, [highscore]);
 
     return (
         <div id="App">
             <header>🔗Country Chains🔗</header>
             <Info msg={msg} score={score} />
             {Main() /* reason: https://stackoverflow.com/a/65328486 */}
+
             <footer>
                 <a
                     href="https://github.com/mckwxp/country-chains"

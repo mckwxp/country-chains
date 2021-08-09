@@ -59,11 +59,7 @@ function Game(props) {
         }
     }
 
-    function handleChange(e) {
-        setName(e.target.value);
-    }
-
-    function handleClick() {
+    function finish() {
         if (props.spectate) {
             alert("You cannot play the game as a spectator");
             return;
@@ -81,25 +77,38 @@ function Game(props) {
         }
     }
 
+    function returnToHome() {
+        props.setPage("START");
+        props.setMsg("Welcome to the game!");
+    }
+
     return (
         <div id="game">
-            <div id="Form">
-                <form onSubmit={handleSubmit} autoComplete="off">
-                    <p>Enter a country name:</p>
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        value={name}
-                        onChange={handleChange}
-                    />
-                    <button type="submit">Chain it!</button>
-                </form>
+            {props.page === "REPLAY" ? (
                 <div>
-                    <button type="button" onClick={handleClick}>
-                        Finish
+                    <button type="button" onClick={returnToHome}>
+                        Back to homepage
                     </button>
                 </div>
-            </div>
+            ) : (
+                <div id="Form">
+                    <form onSubmit={handleSubmit} autoComplete="off">
+                        <p>Enter a country name:</p>
+                        <input
+                            type="text"
+                            autoComplete="off"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <button type="submit">Chain it!</button>
+                    </form>
+                    <div>
+                        <button type="button" onClick={finish}>
+                            Finish
+                        </button>
+                    </div>
+                </div>
+            )}
             <CountryList
                 countries={props.countries}
                 playersInRoom={props.playersInRoom}

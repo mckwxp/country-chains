@@ -39,16 +39,22 @@ function Highscore(props) {
         <div id="Highscore">
             <h1>Highscore</h1>
             <table>
-                <tr>
-                    <th scope="col">Mode</th>
-                    <th scope="col">Players</th>
-                    <th scope="col">
-                        Score
-                        <br />
-                        (unique countries)
-                    </th>
-                </tr>
-                {props.highscore ? props.highscore.map(HighscoreItem) : null}
+                <thead>
+                    <tr>
+                        <th scope="col">Mode</th>
+                        <th scope="col">Players</th>
+                        <th scope="col">
+                            Score
+                            <br />
+                            (unique countries)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.highscore
+                        ? props.highscore.map(HighscoreItem)
+                        : null}
+                </tbody>
             </table>
             <br />
             <br />

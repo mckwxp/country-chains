@@ -58,8 +58,8 @@ function StartPage(props) {
 
     function Room(r) {
         return (
-            <div>
-                <label key={"room" + r.id}>
+            <div key={"room" + r.id}>
+                <label>
                     <input
                         type="radio"
                         value={r.id}
@@ -130,14 +130,16 @@ function StartPage(props) {
                     </button>
                 </div>
                 <div>
-                    <br />
-                    Enter your player name:
-                    <br />
-                    <input
-                        type="text"
-                        value={props.username}
-                        onChange={onchangeUsername}
-                    />
+                    <label>
+                        <br />
+                        Enter your player name:
+                        <br />
+                        <input
+                            type="text"
+                            value={props.username}
+                            onChange={onchangeUsername}
+                        />
+                    </label>
                     <button type="submit">Play now!</button>
                     <br />
                 </div>

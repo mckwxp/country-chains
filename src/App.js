@@ -9,18 +9,18 @@ import Map from "./components/Map.js";
 import Highscore from "./components/Highscore.js";
 import { socket } from "./components/socket.js";
 
-function App() {
+function App(props) {
     const [mode, setMode] = useState("Land"); // game mode state
     const [msg, setMsg] = useState("Welcome to the game!"); // message panel state
     const [countries, setCountries] = useState([]); // result panel state
     const [playersInRoom, setPlayersInRoom] = useState([]); // players-in-room state
     const [username, setUsername] = useState(""); // player name state
-    const [page, setPage] = useState("START"); // game page state
-    const [rooms, setRooms] = useState([]); // room list state
+    const [page, setPage] = useState(props.page ?? "START"); // game page state
+    const [rooms, setRooms] = useState(props.rooms ?? []); // room list state
     const [room, setRoom] = useState(null); // current room state
     const [spectate, setSpectate] = useState(false); // spectator state
     const [connected, setConnected] = useState(false); // server connection state
-    const [highscore, setHighscore] = useState(null); // highscore state
+    const [highscore, setHighscore] = useState(props.highscore ?? null); // highscore state
 
     function MapAndPlayers() {
         return (
@@ -117,19 +117,8 @@ function App() {
         socket.on("connect", () => setConnected(true));
         socket.on("disconnect", () => setConnected(false));
         socket.on("highscore", setHighscore);
-        socket.on("highscoreFail", () => {
-            alert("Failed to get highscore data");
-        });
+        socket.on("highscoreFail", () => alert("Failed to get highscore data"));
     }, []);
-
-    // Set highscore once data comes back from server
-    // useEffect(() => {
-    //     if (highscore) {
-    //         setMode(highscore.mode);
-    //         setCountries(highscore.countries);
-    //         setPlayersInRoom(highscore.playersInRoom);
-    //     }
-    // }, [highscore]);
 
     return (
         <div id="App">
